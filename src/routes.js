@@ -1,40 +1,58 @@
-import React, { lazy } from "react";
-import { Redirect } from "react-router-dom";
-import HomeLayout from "src/layouts/HomeLayout";
+import React, { lazy } from 'react'
+import { Redirect } from 'react-router-dom'
+import HomeLayout from 'src/layouts/HomeLayout'
 
 export const routes = [
   {
     exact: true,
-    path: "/",
+    path: '/',
     layout: HomeLayout,
-    component: lazy(() => import("src/views/pages/Home")),
+    component: lazy(() => import('src/views/pages/Home')),
   },
   {
     exact: true,
-    path: "/wallet",
+    path: '/wallet',
     layout: HomeLayout,
-    component: lazy(() => import("src/views/pages/Wallet/Index")),
+    component: lazy(() => import('src/views/pages/Wallet/Index')),
   },
   {
     exact: true,
-    path: "/gallery",
+    path: '/gallery',
     layout: HomeLayout,
-    component: lazy(() => import("src/views/pages/Gallery/Index")),
+    component: lazy(() => import('src/views/pages/Gallery/Index')),
   },
   {
     exact: true,
-    path: "/gallry-details",
+    path: '/gallry-details',
     layout: HomeLayout,
-    component: lazy(() => import("src/views/pages/Gallery/Details")),
+    component: lazy(() => import('src/views/pages/Gallery/Details')),
+  },
+  {
+    exact: true,
+    path: '/team',
+    layout: HomeLayout,
+    component: lazy(() => import('src/views/pages/Home/Team')),
+  },
+  {
+    exact: true,
+    path: '/why-us',
+    layout: HomeLayout,
+    component: lazy(() => import('src/views/pages/Header/WhyUs')),
+  },
+  {
+    exact: true,
+    path: '/faq',
+    layout: HomeLayout,
+    component: lazy(() => import('src/views/pages/Header/FAQ')),
   },
 
   {
     exact: true,
-    path: "/404",
-    component: lazy(() => import("src/views/errors/NotFound")),
+    path: '/404',
+    component: lazy(() => import('src/views/errors/NotFound')),
   },
 
   {
     component: () => <Redirect to="/404" />,
   },
-];
+]

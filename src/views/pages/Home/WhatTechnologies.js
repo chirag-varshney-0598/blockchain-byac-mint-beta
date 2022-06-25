@@ -8,6 +8,7 @@ import {
   Button,
   withStyles,
   TextField,
+  Slider,
 } from '@material-ui/core'
 
 import PublicMint from './PublicMint'
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     background: 'transparent',
     // height: "90vh",
-    padding: '80px 0',
+    // padding: '80px 0',
     overflow: 'hidden',
     zIndex: ' 1',
     [theme.breakpoints.down('md')]: {
@@ -139,6 +140,11 @@ const useStyles = makeStyles((theme) => ({
 
   mint: {
     background: '#00ffff',
+    borderRadius: '120px',
+    fontWeight: '900',
+    fontStyle: 'italic',
+    WebkitTextStrokeWidth: '1px',
+    WebkitTextStrokeColor: 'black',
     // border: "1px solid #FFFFFF;",
     '@media(max-width:960px)': {
       marginTop: '-12px',
@@ -175,19 +181,20 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '100%',
     display: 'flex',
     height: '57px',
-    border: '1px solid #00ffff',
+    border: '3px solid #00ffff',
     alignItems: 'center',
     justifyContent: 'space-between',
-    borderRadius: '5px',
+    borderRadius: '20px',
 
     '& input': {
       textAlign: 'center',
       backgroundColor: 'transparent',
       color: '#fff',
       border: 'none',
-      fontSize: '15px',
+      fontSize: '20px',
       minWidth: '20px',
       maxWidth: '50px',
+      fontWeight: 'bolder',
       '&:focus-visible': {
         outline: 'none',
       },
@@ -202,9 +209,13 @@ const useStyles = makeStyles((theme) => ({
       color: '#fff',
       '&:first-child': {
         color: '#00ffff;',
+        borderRadius: '20px',
+        fontSize: '70px',
       },
       '&:last-child': {
         color: '#00ffff',
+        borderRadius: '20px',
+        fontSize: '45px',
       },
     },
     textbox: {
@@ -253,7 +264,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '45px',
     marginTop: '45px',
     '@media(max-width:770px)': {
-      margin: '45px 9px 45px -7px',
+      margin: '45px 9px 0px -7px',
     },
   },
   textsec: {
@@ -264,6 +275,16 @@ const useStyles = makeStyles((theme) => ({
   newgrid: {
     '@media(max-width:960px)': {
       marginTop: '-20px',
+    },
+  },
+  subBoxHading: {
+    textAlign: 'center',
+    fontWeight: 'bolder',
+    letterSpacing: '2px',
+  },
+  amuountTag: {
+    '& h4': {
+      color: '#fff',
     },
   },
 }))
@@ -445,7 +466,7 @@ export default function BestSeller() {
           alignItems="flex-start"
           className={classes.gridflex}
         >
-          <Grid item xs={12} sm={12} md={6} lg={6}>
+          {/* <Grid item xs={12} sm={12} md={6} lg={6}>
             <Box className="bannerimageBox">
               <img
                 src="images/banner.png"
@@ -454,40 +475,42 @@ export default function BestSeller() {
                 alt="banner image"
               />
             </Box>
-          </Grid>
+          </Grid> */}
           <Grid
             item
             xs={12}
             sm={12}
-            md={6}
-            lg={6}
+            md={12}
+            lg={12}
             className={`${classes.textsec} wow bounceInUp`}
           >
-            <Box textAlign="center">
-              <Typography
-                style={{ color: '#FFFFFF' }}
-                variant="h2"
-                className="text-white"
-              >
-                {`${user?.totalSupply} OF ${user?.MAX_NFT_SUPPLY} MINTED`}
-              </Typography>
-            </Box>
-
             <Box className={classes.textbox} mb={5}>
               <Box className={classes.amount}>
-                <Grid container spacing={4} style={{ background: '#2e2a2a' }}>
+                <Grid container spacing={4}>
                   <Grid item xs={12} sm={12}>
                     <Box>
                       <Grid container spacing={4} alignItems="center">
-                        <Grid item xs={3}>
-                          <label
-                            style={{ paddingRight: '5px', marginTop: '10px' }}
-                          >
-                            Quantity:{' '}
-                          </label>
+                        <Grid item xs={6} lg={6}>
+                          <Box>
+                            <label className={classes.subBoxHading}>
+                              <i>AMOUNT</i>
+                            </label>
+                            <Box className={classes.quantity}>
+                              <Box
+                                className={classes.amuountTag}
+                                width="100%"
+                                textAlign="center"
+                              >
+                                <Typography variant="h4">0.03 MOVR</Typography>
+                              </Box>
+                            </Box>
+                          </Box>
                         </Grid>
-                        <Grid item xs={9}>
-                          <Box className={classes.mainsecion}>
+                        <Grid item xs={6} lg={6}>
+                          <Box>
+                            <label className={classes.subBoxHading}>
+                              <i>QUANTITY</i>
+                            </label>
                             <Box className={classes.quantity}>
                               <Button
                                 variant="outline"
@@ -522,6 +545,11 @@ export default function BestSeller() {
                                 +
                               </Button>
                             </Box>
+                          </Box>
+                        </Grid>
+                        {/* <Grid item xs={9}>
+                          <Box className={classes.mainsecion}>
+                         
                             <Box className={classes.buttonsectionamount}>
                               <Button
                                 style={{ marginRight: '10px' }}
@@ -544,8 +572,8 @@ export default function BestSeller() {
                               </Button>
                             </Box>
                           </Box>
-                        </Grid>
-                        <Grid item xs={6} sm={3} className={classes.newgrid}>
+                        </Grid> */}
+                        {/* <Grid item xs={6} sm={3} className={classes.newgrid}>
                           <label style={{ paddingRight: '5px' }}>
                             Total price:
                           </label>
@@ -559,7 +587,7 @@ export default function BestSeller() {
                           >
                             {amount ? amount : '0'} ETH
                           </label>
-                        </Grid>
+                        </Grid> */}
                       </Grid>
                     </Box>
                   </Grid>
@@ -594,10 +622,26 @@ export default function BestSeller() {
                     fullWidth
                     onClick={() => user.connectWallet()}
                   >
-                    Connect Wallet
+                    CONNECT WALLET
                   </Button>
                 )}
               </Box>
+              <Grid container>
+                <Grid item lg={12} xs={12}>
+                  <Slider value={30} />
+                </Grid>
+              </Grid>
+            </Box>
+            <Box textAlign="center" mt={3}>
+              <Typography
+                style={{ color: '#FFFFFF', fontWeight: '900' }}
+                variant="h3"
+                className="text-white"
+              >
+                <i>
+                  {`${user?.totalSupply} OF ${user?.MAX_NFT_SUPPLY} APES MINTED`}
+                </i>
+              </Typography>
             </Box>
           </Grid>
         </Grid>

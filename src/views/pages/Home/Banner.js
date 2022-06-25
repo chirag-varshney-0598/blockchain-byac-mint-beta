@@ -16,12 +16,12 @@ const useStyles = makeStyles((theme) => ({
     // backgroundRepeat: "no-repeat",
     // background: "linear-gradient(0deg, #060606 0%, rgba(0, 0, 0, 0) 139.5%)",
     // backgroundSize: "cover",
-    padding: '80px 0px 120px',
+    padding: '80px 0px 0px',
     zIndex: ' 1',
     [theme.breakpoints.down('md')]: {
       height: 'auto',
       '@media (max-width: 768px)': {
-        padding: '60px 0px 120px',
+        padding: '60px 0px 60px',
       },
     },
   },
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '10px !important',
   },
   textbox: {
-    textAlign: 'left',
+    textAlign: 'center',
     '& h1': {
       fontSize: '45px',
       fontWeight: '600',
@@ -76,12 +76,11 @@ const useStyles = makeStyles((theme) => ({
       [theme.breakpoints.down('lg')]: {},
       [theme.breakpoints.down('xs')]: {
         fontSize: '30px',
-        textAlign: 'left',
       },
     },
     '& p': {
       fontWeight: '300',
-      fontSize: '17px',
+      fontSize: '20px',
       marginTop: '20px',
       color: '#cecece',
     },
@@ -110,27 +109,47 @@ export default function BestSeller() {
   return (
     <Box className={classes.bannerBox}>
       <Container maxWidth="lg" p={0}>
-        <Grid container spacing={3} alignItems="left">
-          <Grid item xs={12} md={6} className={classes.gridflex}>
-            <Box className={classes.textbox}>
+        <Grid container alignItems="left">
+          <Grid
+            item
+            xs={12}
+            md={12}
+            lg={12}
+            sm={12}
+            className={classes.gridflex}
+          >
+            <Box className={classes.textbox} style={{ textAlign: 'center' }}>
               <Typography variant="h1">
-                Let's grab some of the most wanted MBYAC NFT.
+                <i>Let's grab some of the most wanted MBYAC NFT.</i>
               </Typography>
-              <Typography variant="body1" align="left">
-                MBAYC is an exclusive 7777 only premium NFT on the Moonriver
-                blockchain with blue chip potential No two of these digital
-                eye-catching pieces of art are alike. Each being uniquely
-                generated from over 140+ never seen Before traits, our traits
-                have specific rarities to ensure there is a clear ranking of
-                NFTs and distinct differences in value for the marketplace.
-                MBAYC is inspired by its Ethereum counterpart but is not
-                affiliated with yuga labs.
+              <Typography
+                variant="body1"
+                align="center"
+                style={{ color: '#fff' }}
+              >
+                <i>
+                  {' '}
+                  MBAYC is an exclusive 7777 only premium NFT on the Moonriver
+                  blockchain with blue chip potential No two of these digital
+                  eye-catching pieces of art are alike. Each being uniquely
+                  generated from over 140+ never seen Before traits, our traits
+                  have specific rarities to ensure there is a clear ranking of
+                  NFTs and distinct differences in value for the marketplace.
+                  MBAYC is inspired by its Ethereum counterpart but is not
+                  affiliated with yuga labs.
+                </i>
               </Typography>
 
-              <Typography variant="body1" align="left">
-                MBAYC is the first ape derivative on MOVR blockchain and prides
-                itself on being a community ran and community focused together
-                we can make history on the MOVVR blockchain.
+              <Typography
+                variant="body1"
+                align="center"
+                style={{ color: '#fff' }}
+              >
+                <i>
+                  MBAYC is the first ape derivative on MOVR blockchain and
+                  prides itself on being a community ran and community focused
+                  together we can make history on the MOVVR blockchain.
+                </i>
               </Typography>
               {/* <Box mt={6} align="left">
                 <Button
@@ -155,7 +174,7 @@ export default function BestSeller() {
               </Box> */}
             </Box>
           </Grid>
-          <Grid item xs={12} md={6}>
+          {/* <Grid item xs={12} md={6}>
             <Box className="bannerimageBox">
               <img
                 src="images/img1.jpeg"
@@ -172,14 +191,9 @@ export default function BestSeller() {
                 className="banner3"
                 alt="banner image"
               />
-              {/* <img
-                src="images/mint-pagev5.jpg"
-                // className="banner1"
-                style={{ width: '80%' }}
-                alt="banner image"
-              /> */}
+            
             </Box>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </Box>

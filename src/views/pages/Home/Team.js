@@ -12,15 +12,17 @@ const useStyles = makeStyles((theme) => ({
   mainContainer: {
     background: 'transaprent',
     color: '#fff',
-    minHeight: '400px',
+    minHeight: '600px',
+    padding: '20px 0px',
   },
   headingBox: {
     textAlign: 'center',
-    '& h4': {
-      color: '#cecece',
-      fontSize: '17px',
+    '& h3': {
+      fontWeight: '600',
       marginTop: '20px',
-      fontWeight: 300,
+    },
+    '& h2': {
+      fontWeight: '900',
     },
   },
   teamContentBox: {
@@ -31,22 +33,22 @@ const useStyles = makeStyles((theme) => ({
 const memberCardDetails = [
   {
     name: 'APEX',
-    image: 'images/img1.jpeg',
+    image: 'images/team/APEX.jpg',
     position: 'Founder/Director',
   },
   {
     name: 'CEASER',
-    image: 'images/img3.jpeg',
+    image: 'images/team/caeser.png',
     position: 'Creative Director',
   },
   {
     name: 'NEEAM',
-    image: 'images/img2.jpeg',
+    image: 'images/team/neeam.png',
     position: 'Web Dev',
   },
   {
     name: 'NEYTIRI',
-    image: 'images/img1.jpeg',
+    image: 'images/team/NEYTIRI.png',
     position: 'Smart Contract Dev',
   },
 ]
@@ -56,12 +58,17 @@ export default function () {
     <Container>
       <Box className={classes.mainContainer}>
         <Box className={classes.headingBox}>
-          <Typography variant="h2">TEAM</Typography>
+          <Typography variant="h2">
+            <i>TEAM</i>
+          </Typography>
           <Box style={{ padding: '0px 45px' }}>
-            <Typography variant="h4">
-              Our team consist of people with different experience who are
-              highly motivated to bring their knowledge and skills to the proect
-              in order to create something great.
+            <Typography variant="h3">
+              <i>
+                {' '}
+                Our team consist of people with different experience who are
+                highly motivated to bring their knowledge and skills to the
+                proect in order to create something great.
+              </i>
             </Typography>
           </Box>
         </Box>

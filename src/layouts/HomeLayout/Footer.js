@@ -140,7 +140,7 @@ export default function Liquidity() {
           <Container maxWidth="lg">
             <Grid container justify="space-around" spacing={1}>
               <Grid item xs={12} md={12} align="center">
-                <Box style={{ maxWidth: '500px' }}>
+                {/* <Box style={{ maxWidth: '500px' }}>
                   <Typography
                     variant="h2"
                     style={{ color: '#FFFFFF', fontWeight: '600' }}
@@ -168,7 +168,7 @@ export default function Liquidity() {
                       <FaTwitterSquare className={classes.largeIcon} />
                     </Link>
                   </Box>
-                </Box>
+                </Box> */}
               </Grid>
             </Grid>
           </Container>

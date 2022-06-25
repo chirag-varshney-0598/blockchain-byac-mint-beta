@@ -20,6 +20,28 @@ const baseOptions = {
         },
       },
     },
+    MuiSlider: {
+      rail: {
+        height: '20px',
+        borderRadius: '30px',
+        color: 'white',
+      },
+      track: {
+        height: '20px',
+        borderRadius: '30px',
+        color: 'yellow',
+      },
+      thumb: {
+        height: '30px',
+        width: '30px',
+        color: '#00ffff',
+      },
+    },
+    slick: {
+      dots: {
+        textAlign: 'center !important',
+      },
+    },
 
     MuiFormLabel: {
       root: { color: '#222' },
@@ -111,6 +133,14 @@ const baseOptions = {
       },
       paper: {
         overflowY: 'unset',
+      },
+    },
+    MuiAccordion: {
+      root: {
+        background: 'transparent',
+        border: '2px solid #00ffff',
+        borderRadius: '20px !important',
+        marginBottom: '30px',
       },
     },
     MuiInputBase: {

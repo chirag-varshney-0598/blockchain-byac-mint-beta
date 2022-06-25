@@ -19,13 +19,43 @@ import Logo from './../../component/Logo'
 import { ACTIVE_NETWORK } from 'src/constants'
 import { sortAddress } from 'src/utils'
 import { useWeb3React } from '@web3-react/core'
-// const headersData = [
-//   {
-//     label: "Home",
-//     href: "/",
-//   },
-// ];
+const headersData = [
+  {
+    label: 'Mint',
+    href: '/',
+  },
+  {
+    label: 'ROADMAP',
+    href: '/',
+  },
+  {
+    label: 'WHY US?',
+    href: '/why-us',
+  },
+  {
+    label: 'TEAM',
+    href: '/team',
+  },
+  {
+    label: 'FAQ',
+    href: '/faq',
+  },
+]
+const socialLink = [
+  {
+    img: '/images/social/discord.png',
+  },
 
+  {
+    img: '/images/social/instagram.png',
+  },
+  {
+    img: '/images/social/moobeans.png',
+  },
+  {
+    img: '/images/social/twitter.png',
+  },
+]
 const useStyles = makeStyles((theme) => ({
   menuButton: {
     fontSize: '20px',
@@ -101,7 +131,7 @@ const useStyles = makeStyles((theme) => ({
   drawericon: {
     color: '#000',
     position: 'absolute',
-    top: '0px',
+    top: '20px',
     right: '-10px',
     fontSize: '25px',
   },
@@ -124,7 +154,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#fff',
     display: 'flex',
     justifyContent: 'center',
-    borderBottom: '1px solid #3e3e3e',
+    // borderBottom: '1px solid #3e3e3e',
     padding: '16px',
     borderRadius: 0,
     width: '100%',
@@ -215,6 +245,10 @@ const useStyles = makeStyles((theme) => ({
     borderTop: '3px solid #300760',
     top: '25px !important',
   },
+  socialBox: {
+    display: 'flex',
+    alignItems: 'center',
+  },
 }))
 
 export default function Header() {
@@ -236,6 +270,7 @@ export default function Header() {
     mainHeader,
     wallet,
     submenu,
+    socialBox,
   } = useStyles()
   const history = useHistory()
   const { account, chainId } = useWeb3React()
@@ -304,11 +339,11 @@ export default function Header() {
             container
             item
             direction="row"
-            justify="flex-start"
+            justify="flex-end"
             alignItems="center"
             style={{ paddingLeft: '0px' }}
           >
-            {/* {getMenuButtons()} */}
+            {getMenuButtons()}
 
             <Box
               style={{ display: 'flex', right: '15px', position: 'absolute' }}
@@ -344,7 +379,7 @@ export default function Header() {
                 </>
               )}
 
-              {!account ? (
+              {/* {!account ? (
                 <Button
                   variant="contained"
                   size="large"
@@ -365,7 +400,7 @@ export default function Header() {
                 >
                   Disconnect {account ? sortAddress(account) : ''}
                 </Button>
-              )}
+              )} */}
             </Box>
           </Grid>
         </Toolbar>
@@ -391,59 +426,36 @@ export default function Header() {
           <div className={drawerContainer}>
             <Box className="logoText">
               <Link to="/">
-                <Typography variant="h4">MOONRIVER BAYC</Typography>
+                {/* <Logo /> */}
+                <Box>
+                  <img
+                    src="/images/background/drawer.png"
+                    alt=""
+                    width="100%"
+                  />
+                </Box>
               </Link>
             </Box>
-            {/* {getDrawerChoices()} */}
-
-            {/* {account && (
-              <Button
-                variant="text"
-                size="large"
-                className={menuMobile}
-                color="secondary"
-                // onClick={() => history.push('/wallet')}
-              >
-                {sortAddress(account)}
-              </Button>
-            )} */}
-
-            {/* <Button
-              variant="text"
-              size="large"
-              className={menuMobile}
-              color="secondary"
-              onClick={() => history.push('/wallet')}
-            >
-              WALLET
-            </Button> */}
-            {/* {!account ? (
-              <Button
-                variant="text"
-                size="large"
-                className={menuMobile}
-                color="secondary"
-                onClick={user.connectWallet}
-              >
-                Connect Wallet
-              </Button>
-            ) : (
-              <Button
-                variant="text"
-                size="large"
-                className={menuMobile}
-                color="secondary"
-                onClick={() => history.push("/wallet")}
-              >
-                Wallet
-              </Button>
-            )} */}
+            {getDrawerChoices()}
+            <Box className={socialBox}>
+              {socialLink.map((data) => {
+                return (
+                  <Box style={{ padding: '5px' }}>
+                    <img
+                      src={data.img}
+                      alt=""
+                      style={{ width: '35px', height: '30px' }}
+                    />
+                  </Box>
+                )
+              })}
+            </Box>
           </div>
         </Drawer>
 
         <div>{femmecubatorLogo}</div>
         <Grid container>
-          <Grid item xs={10}></Grid>
+          {/* <Grid item xs={10}></Grid> */}
 
           <Grid item xs={2}>
             <IconButton
@@ -459,7 +471,7 @@ export default function Header() {
               <MenuIcon
                 width="60px"
                 height="60px"
-                style={{ color: 'rgb(219 9 9)', fontSize: '30px' }}
+                style={{ color: '#5cdbd5', fontSize: '30px' }}
               />
             </IconButton>
           </Grid>
@@ -471,50 +483,51 @@ export default function Header() {
   const femmecubatorLogo = (
     <Box className="logoText">
       <Link to="/">
-        <Typography variant="h4">MOONRIVER BAYC</Typography>
+        {/* <Typography variant="h4">MOONRIVER BAYC</Typography> */}
+        <Logo />
       </Link>
     </Box>
   )
-  // const getDrawerChoices = () => {
-  //   return headersData.map(({ label, href }) => {
-  //     return (
-  //       <Box style={{ width: "106%" }}>
-  //         <Button
-  //           {...{
-  //             key: label,
-  //             color: "inherit",
-  //             to: href,
-  //             component: Link,
-  //             className: menuButton1,
-  //           }}
-  //           style={{ width: "100%" }}
-  //         >
-  //           <MenuItem className={menuMobile}>{label}</MenuItem>
-  //         </Button>
-  //       </Box>
-  //     );
-  //   });
-  // };
+  const getDrawerChoices = () => {
+    return headersData.map(({ label, href }) => {
+      return (
+        <Box style={{ width: '100%' }}>
+          <Button
+            {...{
+              key: label,
+              color: 'inherit',
+              to: href,
+              component: Link,
+              className: menuButton1,
+            }}
+            style={{ width: '100%' }}
+          >
+            <MenuItem className={menuMobile}>{label}</MenuItem>
+          </Button>
+        </Box>
+      )
+    })
+  }
 
-  // const getMenuButtons = () => {
-  //   return headersData.map(({ label, href }) => {
-  //     return (
-  //       <>
-  //         <Button
-  //           {...{
-  //             key: label,
-  //             color: "inherit",
-  //             to: href,
-  //             component: Link,
-  //             className: menuButton,
-  //           }}
-  //         >
-  //           {label}
-  //         </Button>
-  //       </>
-  //     );
-  //   });
-  // };
+  const getMenuButtons = () => {
+    return headersData.map(({ label, href }) => {
+      return (
+        <>
+          <Button
+            {...{
+              key: label,
+              color: 'inherit',
+              to: href,
+              component: Link,
+              className: menuButton,
+            }}
+          >
+            {label}
+          </Button>
+        </>
+      )
+    })
+  }
 
   return (
     <>
@@ -527,8 +540,8 @@ export default function Header() {
           maxWidth={history.location.pathname !== '/' ? 'lg' : 'fixed'}
           className={containerHeight}
         >
-          {/* {mobileView ? displayMobile() : displayDesktop()} */}
-          {displayDesktop()}
+          {mobileView ? displayMobile() : displayDesktop()}
+          {/* {displayDesktop()} */}
         </Container>
       </AppBar>
     </>

@@ -5,6 +5,7 @@ import Banner from './Banner'
 import WhatTechnologies from './WhatTechnologies'
 import PublicMint from './PublicMint'
 import Team from './Team'
+import Corosel from './Corosel'
 
 function Home(props) {
   return (
@@ -13,7 +14,8 @@ function Home(props) {
         <Banner />
         <WhatTechnologies />
         {/* <PublicMint /> */}
-        <Team />
+        <Corosel />
+        {/* <Team /> */}
       </Box>
     </Page>
   )
