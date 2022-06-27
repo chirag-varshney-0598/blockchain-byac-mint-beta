@@ -10,16 +10,20 @@ import {
   TextField,
   Slider,
 } from '@material-ui/core'
-
-import PublicMint from './PublicMint'
 import { useWeb3React } from '@web3-react/core'
 import { mintAddress, ACTIVE_NETWORK } from 'src/constants'
-import RezwanPodABI from 'src/constants/ABI/RezwanPodABI.json'
-import { getWeb3Obj, getContract, swichNetworkHandler } from 'src/utils'
+import NFTPunksABI from 'src/constants/ABI/NFTPunksABI.json'
+import {
+  getWeb3Obj,
+  getContract,
+  swichNetworkHandler,
+  getWeb3ContractObject,
+} from 'src/utils'
 import { UserContext } from 'src/context/User'
 import { toast } from 'react-toastify'
 import moment from 'moment'
 import ButtonCircularProgress from 'src/component/ButtonCircularProgress'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   bannerBox: {
@@ -295,165 +299,83 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BestSeller() {
   const classes = useStyles()
+  const history = useHistory()
   const { library, account, chainId } = useWeb3React()
   const user = useContext(UserContext)
   const [numberofnft, setNumberofnft] = useState(1)
-  const [userBalance, setUserBalance] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
-  const [isLoadingAuth, setIsLoadingAuth] = useState(false)
-  const [amount, setAmount] = useState(0)
-  useEffect(() => {
-    setAmount(numberofnft * user.nftPrice)
-    setIsLoadingAuth(user?.isLoadingData)
-  }, [numberofnft, user.nftPrice, user.isLoadingData])
-
-  const mintNFT = async () => {
+  const [nftPrice, setNFTPrice] = useState('')
+  const [totalSupply, setTotalSupply] = useState('')
+  const [maxSupply, setMaxSupply] = useState('')
+  const [mintBtntTxt, setMintBtnTxt] = useState('MINT NOW')
+  const nftMintHandlerBlockChain = async () => {
     if (chainId === ACTIVE_NETWORK) {
-      if (
-        Number(user?.totalSupply) + Number(numberofnft) <=
-        Number(user?.MAX_NFT_SUPPLY)
-      ) {
-        if (Number(numberofnft) <= Number(user?.MAX_NFT_CAP)) {
+      if (parseFloat(user?.yourWalletBalance) > 0) {
+        if (
+          parseFloat(user?.yourWalletBalance) >=
+          parseFloat(numberofnft) * parseFloat(nftPrice)
+        ) {
           if (
-            Number(user?.balanceOfValue) + Number(numberofnft) <=
-            Number(user?.MAX_NFT_WALLET)
+            parseInt(totalSupply) + parseInt(numberofnft) <=
+            parseInt(maxSupply)
           ) {
-            if (account && numberofnft && numberofnft !== '') {
+            try {
               setIsLoading(true)
-              try {
-                const web3 = await getWeb3Obj()
-                var balance = await web3.eth.getBalance(account)
-                var walletBalance = await web3.utils.fromWei(balance.toString())
-
-                if (parseFloat(walletBalance) > parseFloat(amount)) {
-                  const contract = getContract(
-                    mintAddress,
-                    RezwanPodABI,
-                    library,
-                    account,
-                  )
-                  console.log('contract', contract)
-                  // PUBLIC
-                  if (user?.saleActive == 4) {
-                    const mintNFTRes = await contract.mintNFT(numberofnft, {
-                      value: web3.utils.toWei(amount.toString()),
-                    })
-                    await mintNFTRes.wait()
-                    toast.success('Minted')
-                  }
-                  // Presale
-                  else if (user?.saleActive == 3) {
-                    const checkIfWhitelisted = await contract.checkIfWhitelisted(
-                      account,
-                    )
-                    if (checkIfWhitelisted) {
-                      const mintNFTRes = await contract.mintNFT(numberofnft, {
-                        value: web3.utils.toWei(amount.toString()),
-                      })
-                      await mintNFTRes.wait()
-                      toast.success('Minted')
-                    } else {
-                      toast.error('Address not whitelisted')
-                    }
-                  }
-                  // SecondEBPresale
-                  else if (user?.saleActive == 2) {
-                    const checkIfWhitelisted = await contract.checkIfWhitelisted(
-                      account,
-                    )
-                    if (checkIfWhitelisted) {
-                      const secondEBSaleClaimed = await contract.secondEBSaleClaimed()
-
-                      const firstEBSale = await contract.firstEBSale()
-                      const secondEBSale = await contract.secondEBSale()
-                      if (
-                        Number(secondEBSaleClaimed.toString()) +
-                          Number(numberofnft) <=
-                        Number(firstEBSale.toString()) +
-                          Number(secondEBSale.toString())
-                      ) {
-                        const mintNFTRes = await contract.mintNFT(numberofnft, {
-                          value: web3.utils.toWei(amount.toString()),
-                        })
-                        await mintNFTRes.wait()
-                        toast.success('Minted')
-                      } else {
-                        toast.error('Minting would exceed max supply')
-                      }
-                    } else {
-                      toast.error('Address not whitelisted')
-                    }
-                  }
-                  // SecondEBPresale
-                  else if (user?.saleActive == 1) {
-                    const checkIfWhitelisted = await contract.checkIfWhitelisted(
-                      account,
-                    )
-                    if (checkIfWhitelisted) {
-                      const firstEBSaleClaimed = await contract.firstEBSaleClaimed()
-
-                      const firstEBSale = await contract.firstEBSale()
-
-                      if (
-                        Number(firstEBSaleClaimed.toString()) +
-                          Number(numberofnft) <=
-                        Number(firstEBSale.toString())
-                      ) {
-                        const mintNFTRes = await contract.mintNFT(numberofnft, {
-                          value: web3.utils.toWei(amount.toString()),
-                        })
-                        await mintNFTRes.wait()
-                        toast.success('Minted')
-                      } else {
-                        toast.error('Minting would exceed max supply')
-                      }
-                    } else {
-                      toast.error('Address not whitelisted')
-                    }
-                  }
-                } else {
-                  toast.warn('Insufficient funds')
-                }
-
-                setIsLoading(false)
-                user.getCurrentMintingDetails()
-              } catch (error) {
-                setIsLoading(false)
-                console.log('ERRROR', error)
-                toast.error(error.message)
-              }
-            } else {
-              toast.error('Please select correct data')
+              setMintBtnTxt('MINTING...')
+              const web3 = await getWeb3Obj()
+              const contractObj = getContract(
+                mintAddress,
+                NFTPunksABI,
+                library,
+                account,
+              )
+              const amountToBeSend =
+                parseFloat(numberofnft) * parseFloat(nftPrice)
+              const mintFun = await contractObj.mint(numberofnft, {
+                value: web3.utils.toWei(amountToBeSend.toString()),
+              })
+              await mintFun.wait()
               setIsLoading(false)
+              setMintBtnTxt('MINT NOW')
+              getBasicNFtDetailsHandler()
+              user.getParticularWalletDetqails()
+              history.push('/wallet')
+              toast.success('Your NFT has been minted successfully.')
+            } catch (error) {
+              console.log(error)
+              toast.error(error.message)
+              setIsLoading(false)
+              setMintBtnTxt('MINT NOW')
             }
           } else {
-            toast.error(
-              'Purchase exceeds max allowed per wallet in a transaction',
-            )
+            toast.error('All NFTs have been minted')
           }
         } else {
-          toast.error(
-            'Purchase exceeds max allowed per wallet in a transaction',
-          )
+          toast.error('Your wallet balance is insufficient')
         }
       } else {
-        toast.error('Minting would exceed max supply')
+        toast.error('Your wallet balance is too low.')
       }
     } else {
-      swichNetworkHandler()
-      setIsLoading(false)
+      user.swichNetworkHandler()
     }
   }
-
-  const getContractBalance = async () => {
+  const getBasicNFtDetailsHandler = async () => {
     const web3 = await getWeb3Obj()
-    const bal = await web3.eth.getBalance(mintAddress)
-    let balance = await web3.utils.fromWei(bal)
-    setUserBalance(balance)
+    try {
+      const contractObj = await getWeb3ContractObject(NFTPunksABI, mintAddress)
+      const getNFTPriceFun = await contractObj.methods.getNFTPrice().call()
+      const totalSupplyFun = await contractObj.methods.totalSupply().call()
+      const MAX_SUPPLYFun = await contractObj.methods.MAX_SUPPLY().call()
+      setTotalSupply(totalSupplyFun.toString())
+      setMaxSupply(MAX_SUPPLYFun.toString())
+      setNFTPrice(web3.utils.fromWei(getNFTPriceFun))
+    } catch (error) {
+      console.log(error)
+    }
   }
-
   useEffect(() => {
-    getContractBalance()
+    getBasicNFtDetailsHandler()
   }, [])
 
   return (
@@ -501,7 +423,9 @@ export default function BestSeller() {
                                 width="100%"
                                 textAlign="center"
                               >
-                                <Typography variant="h4">0.03 MOVR</Typography>
+                                <Typography variant="h4">{`${Number(
+                                  parseFloat(nftPrice) * parseInt(numberofnft),
+                                ).toFixed(2)} MOVR`}</Typography>
                               </Box>
                             </Box>
                           </Box>
@@ -547,47 +471,6 @@ export default function BestSeller() {
                             </Box>
                           </Box>
                         </Grid>
-                        {/* <Grid item xs={9}>
-                          <Box className={classes.mainsecion}>
-                         
-                            <Box className={classes.buttonsectionamount}>
-                              <Button
-                                style={{ marginRight: '10px' }}
-                                variant="contained"
-                                size="large"
-                                color="secondary"
-                                disabled={isLoading}
-                                onClick={() => setNumberofnft(2)}
-                              >
-                                2
-                              </Button>
-                              <Button
-                                variant="contained"
-                                size="large"
-                                color="secondary"
-                                onClick={() => setNumberofnft(4)}
-                                disabled={isLoading}
-                              >
-                                4
-                              </Button>
-                            </Box>
-                          </Box>
-                        </Grid> */}
-                        {/* <Grid item xs={6} sm={3} className={classes.newgrid}>
-                          <label style={{ paddingRight: '5px' }}>
-                            Total price:
-                          </label>
-                        </Grid>
-                        <Grid item xs={6} sm={9} className={classes.newgrid}>
-                          <label
-                            style={{
-                              paddingRight: '5px',
-                              color: '#00ffff',
-                            }}
-                          >
-                            {amount ? amount : '0'} ETH
-                          </label>
-                        </Grid> */}
                       </Grid>
                     </Box>
                   </Grid>
@@ -602,16 +485,11 @@ export default function BestSeller() {
                     color="secondary"
                     fullWidth
                     onClick={() => {
-                      if (account) {
-                        mintNFT()
-                      } else {
-                        toast.warn('Please connect your wallet')
-                      }
+                      nftMintHandlerBlockChain()
                     }}
-                    // disabled={isLoading || isLoadingAuth}
-                    disabled={true}
+                    disabled={isLoading}
                   >
-                    MINT NOW {isLoading && <ButtonCircularProgress />}
+                    {mintBtntTxt} {isLoading && <ButtonCircularProgress />}
                   </Button>
                 ) : (
                   <Button
@@ -628,7 +506,7 @@ export default function BestSeller() {
               </Box>
               <Grid container>
                 <Grid item lg={12} xs={12}>
-                  <Slider value={30} />
+                  <Slider value={totalSupply} />
                 </Grid>
               </Grid>
             </Box>
@@ -638,9 +516,7 @@ export default function BestSeller() {
                 variant="h3"
                 className="text-white"
               >
-                <i>
-                  {`${user?.totalSupply} OF ${user?.MAX_NFT_SUPPLY} APES MINTED`}
-                </i>
+                <i>{`${totalSupply} OF ${maxSupply} APES MINTED`}</i>
               </Typography>
             </Box>
           </Grid>

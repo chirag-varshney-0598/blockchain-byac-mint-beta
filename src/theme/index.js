@@ -225,7 +225,7 @@ const baseOptions = {
         },
         '&.Mui-disabled': {
           color: '#e7d7d7',
-          backgroundColor: '#962f2f',
+          backgroundColor: '#2f8b96',
         },
       },
       outlinedPrimary: {

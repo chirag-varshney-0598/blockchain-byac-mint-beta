@@ -11,6 +11,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
+  FormHelperText,
 } from '@material-ui/core'
 import Page from 'src/component/Page'
 import { useWeb3React } from '@web3-react/core'
@@ -28,10 +29,11 @@ import {
   getWeb3ContractObject,
 } from 'src/utils'
 import ButtonCircularProgress from 'src/component/ButtonCircularProgress'
+import NFTPunksABI from 'src/constants/ABI/NFTPunksABI.json'
 const useStyles = makeStyles((theme) => ({
   Padding_Top: {
     paddingTop: '50px',
-    backgroundColor: '#000',
+    // backgroundColor: '#000',
     '& h3': {
       color: '#00ffff',
     },
@@ -77,9 +79,9 @@ const useStyles = makeStyles((theme) => ({
 
   boxheading1: {
     display: ' inline-block',
-    padding: '10px',
+    // padding: '10px',
     borderRadius: '5px',
-    marginTop: '20px',
+    // marginTop: '20px',
     color: '#fafafa',
     fontWeight: '600',
   },
@@ -127,15 +129,24 @@ function Gallery(props) {
   const [ownerOf, setOwnerOf] = useState('')
   const location = useLocation()
   const [isUpdate, setIsUpdate] = useState(false)
+  const [isValidAddress, setIsValidAddress] = useState(false)
   const [transferAddress, setTransferAddress] = useState('')
+  const [reflectionBalance, setReflectionBalance] = useState('')
+  const [isClaimingReward, setIsClaimingReward] = useState(false)
   const handleClose = () => {
     setOpen(false)
   }
   const getDetails = async (id) => {
     setIsLoading(true)
     try {
-      const contract = await getWeb3ContractObject(RezwanPodABI, mintAddress)
-
+      const web3 = await getWeb3Obj()
+      const contract = await getWeb3ContractObject(NFTPunksABI, mintAddress)
+      const getReflectionBalanceFun = await contract.methods
+        .getReflectionBalance(id.toString())
+        .call()
+      setReflectionBalance(
+        web3.utils.fromWei(getReflectionBalanceFun.toString()),
+      )
       const ownerOf_L = await contract.methods.ownerOf(id.toString()).call()
       setOwnerOf(ownerOf_L)
 
@@ -144,12 +155,31 @@ function Gallery(props) {
 
       if (res.status === 200) {
         setnftDetails({ id: id.toString(), nfdData: res.data })
-        console.log(' res.data', res.data)
+
         setIsLoading(false)
       }
     } catch (error) {
       console.log('ERROR', error)
       setIsLoading(false)
+    }
+  }
+  const claimRewardBlockchainHandler = async () => {
+    if (parseFloat(reflectionBalance) > 0) {
+      try {
+        setIsClaimingReward(true)
+        const contract = getContract(mintAddress, NFTPunksABI, library, account)
+        const claimRewardFun = await contract.claimReward(nftDetails.id)
+        await claimRewardFun.wait()
+        getDetails(nftDetails.id)
+        toast.success('Your reward has been claimed successfully.')
+        setIsClaimingReward(false)
+      } catch (error) {
+        console.log(error)
+        setIsClaimingReward(false)
+        toast.error(error.message)
+      }
+    } else {
+      toast.error('No reward found!')
     }
   }
   const transferFromHandler = async () => {
@@ -158,11 +188,12 @@ function Gallery(props) {
         const web3 = await getWeb3Obj()
         const dataRes = web3.utils.isAddress(transferAddress)
         if (dataRes) {
+          setIsValidAddress(false)
           try {
             setIsUpdate(true)
             const contract = getContract(
               mintAddress,
-              RezwanPodABI,
+              NFTPunksABI,
               library,
               account,
             )
@@ -173,10 +204,10 @@ function Gallery(props) {
               nftDetails.id,
             )
             await res.wait()
-            toast.success('Success')
+            toast.success('NFT has been transfered successfully.')
             setIsUpdate(false)
             getDetails(nftDetails.id)
-            user.getCurrentMintingDetails()
+            // user.getCurrentMintingDetails()
             handleClose()
           } catch (error) {
             setIsUpdate(false)
@@ -185,7 +216,8 @@ function Gallery(props) {
             console.log('error', error)
           }
         } else {
-          toast.error('Please enter valid address')
+          // toast.error('Please enter valid address')
+          setIsValidAddress(true)
         }
       } else {
         toast.error('Please enter address')
@@ -245,8 +277,17 @@ function Gallery(props) {
                       variant="body2"
                       style={{ wordBreak: 'break-all', color: '#f0f0f0' }}
                     >
-                      <strong>Owned by: </strong>
+                      <strong>Owned by: </strong>&nbsp;
                       {ownerOf ? ownerOf : ''}
+                    </Typography>
+                    <Typography
+                      variant="h4"
+                      style={{ wordBreak: 'break-all', color: '#f0f0f0' }}
+                    >
+                      <strong>Reflection Balance: </strong>&nbsp;
+                      {reflectionBalance
+                        ? `${Number(reflectionBalance).toFixed(3)} MOVR`
+                        : ''}
                     </Typography>
 
                     {ownerOf &&
@@ -263,9 +304,29 @@ function Gallery(props) {
                             variant="contained"
                             size="large"
                             color="secondary"
+                            disabled={isClaimingReward}
                             onClick={(e) => setOpen(true)}
                           >
                             <span>TRANSFER</span>
+                          </Button>
+                          <Button
+                            style={{
+                              lineHeight: '25px',
+                              border: 'none',
+                              borderRadius: 'none',
+                            }}
+                            className={classes.filterbox}
+                            variant="contained"
+                            size="large"
+                            color="secondary"
+                            onClick={claimRewardBlockchainHandler}
+                            disabled={isClaimingReward}
+                          >
+                            {isClaimingReward ? (
+                              <span>CLAIMING...</span>
+                            ) : (
+                              <span>CLAIM</span>
+                            )}
                           </Button>
                         </Box>
                       )}
@@ -317,8 +378,15 @@ function Gallery(props) {
                       placeholder="0xx0000"
                       value={transferAddress}
                       disabled={isUpdate}
-                      onChange={(e) => setTransferAddress(e.target.value)}
+                      onChange={(e) => {
+                        setTransferAddress(e.target.value)
+                      }}
                     />
+                    {isValidAddress && transferAddress !== '' && (
+                      <FormHelperText error>
+                        Please enter a valid address.
+                      </FormHelperText>
+                    )}
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>

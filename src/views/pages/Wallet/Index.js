@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     padding: '50px 0',
     position: 'relative',
-    background: 'rgba(12, 12, 13, 0.91)',
+    // background: 'rgba(12, 12, 13, 0.91)',
     textAlign: 'center',
     marginBottom: '25px !important',
     justifyContent: 'center',
@@ -200,6 +200,11 @@ const useStyles = makeStyles((theme) => ({
     '@media (max-width: 900px)': {
       width: '291px',
     },
+  },
+  relfectionBox: {
+    width: '100%',
+    textAlign: 'center',
+    color: '#fff',
   },
 }))
 
@@ -370,7 +375,7 @@ function Wallet(props) {
 
   return (
     <Page title="The Defiants - Become part of our NFT revolution!">
-      <Box style={{ backgroundColor: '#000' }}>
+      <Box>
         <Box className={classes.deatailimage} mb={18}>
           <img
             src={`https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${account}&choe=UTF-8`}
@@ -404,66 +409,7 @@ function Wallet(props) {
                   </Box>
                 </Grid>
               )}
-            <Grid item xs={12} sm={6} md={6}>
-              <Box className={classes.walletdiv} mt={2}>
-                <Typography variant="h6" style={{ color: 'black' }}>
-                  Listed NFTs
-                </Typography>
-                <Typography variant="h1">{user.balanceOfValue}</Typography>
-                {/* <GiWallet /> */}
-                <Box className={`${classes.box} wallet_box`}></Box>
-              </Box>
-            </Grid>
           </Grid>
-
-          {user &&
-            user?.adminWalletAddress &&
-            account &&
-            user?.adminWalletAddress === account && (
-              <Box>
-                <Grid container spacing={3} alignItems="center">
-                  <Grid
-                    style={{ marginTop: '25px', marginBottom: '25px' }}
-                    item
-                    xs={12}
-                    sm={6}
-                    md={12}
-                    align="center"
-                  >
-                    <Button
-                      style={{ marginRight: '10px' }}
-                      variant="contained"
-                      size="large"
-                      color="secondary"
-                      onClick={withdrawHandler}
-                      disabled={isUpdatingWithdrwal}
-                    >
-                      Withdraw{' '}
-                      {isUpdatingWithdrwal && <ButtonCircularProgress />}
-                    </Button>
-                    <Button
-                      style={{ margin: '0 9px 0 0 !important' }}
-                      variant="contained"
-                      size="large"
-                      onClick={(e) => setOpen(true)}
-                      color="secondary"
-                      disabled={isUpdatingWithdrwal}
-                    >
-                      Add Whitelist
-                    </Button>
-                    <Button
-                      variant="contained"
-                      size="large"
-                      color="secondary"
-                      onClick={(e) => setRemove(true)}
-                      disabled={isUpdatingWithdrwal}
-                    >
-                      Remove Whitelist
-                    </Button>
-                  </Grid>
-                </Grid>
-              </Box>
-            )}
 
           <Typography
             variant="h3"
@@ -477,6 +423,14 @@ function Wallet(props) {
             ***All NFTs will be displayed once the admin stores their
             Metadata***
           </Typography>
+          <Box className={classes.relfectionBox}>
+            <Typography
+              variant="h4"
+              style={{ fontSize: '25px', fontWeight: '700' }}
+            >
+              Total Relfection: &nbsp;{user?.totalReward} MOVR
+            </Typography>
+          </Box>
           <Box mt={5} mb={5}>
             <Grid container spacing={3}>
               {nftList &&
@@ -508,7 +462,7 @@ function Wallet(props) {
                   <Typography
                     variant="h3"
                     align="center"
-                    style={{ color: '#ccc' }}
+                    style={{ color: '#fff' }}
                   >
                     Loading...
                   </Typography>
@@ -519,7 +473,6 @@ function Wallet(props) {
           </Box>
 
           <Dialog
-            style={{ background: 'rgb(12 12 13 / 47%)' }}
             open={open}
             // onClose={handleClose}
             aria-labelledby="alert-dialog-title"
@@ -569,7 +522,6 @@ function Wallet(props) {
           </Dialog>
 
           <Dialog
-            style={{ background: 'rgb(12 12 13 / 47%)' }}
             open={remove}
             // onClose={handleRemove}
             aria-labelledby="alert-dialog-title"

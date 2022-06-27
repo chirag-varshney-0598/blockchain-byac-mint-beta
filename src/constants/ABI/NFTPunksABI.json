@@ -10,21 +10,6 @@
         "internalType": "string",
         "name": "symbol",
         "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "baseTokenURI",
-        "type": "string"
-      },
-      {
-        "internalType": "uint256",
-        "name": "max",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "admin",
-        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -195,12 +180,25 @@
   },
   {
     "inputs": [],
-    "name": "_tokenIdTracker",
+    "name": "MAX_SUPPLY",
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "_value",
+        "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "admin",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -315,13 +313,7 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "numberOfNfts",
-        "type": "uint256"
-      }
-    ],
+    "inputs": [],
     "name": "getNFTPrice",
     "outputs": [
       {

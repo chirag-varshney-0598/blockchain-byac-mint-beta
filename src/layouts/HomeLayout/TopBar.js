@@ -21,7 +21,7 @@ import { sortAddress } from 'src/utils'
 import { useWeb3React } from '@web3-react/core'
 const headersData = [
   {
-    label: 'Mint',
+    label: 'MINT',
     href: '/',
   },
   {
@@ -39,6 +39,10 @@ const headersData = [
   {
     label: 'FAQ',
     href: '/faq',
+  },
+  {
+    label: 'WALLET',
+    href: '/wallet',
   },
 ]
 const socialLink = [
@@ -295,41 +299,6 @@ export default function Header() {
     window.addEventListener('resize', () => setResponsiveness())
   }, [])
 
-  const [open1, setOpen1] = useState({ community: false, user: false })
-  const anchorRef = { community: useRef(null), user: useRef(null) }
-
-  // const handleToggle = (name) => {
-  //   setOpen1({ ...open1, [name]: !open1[name] });
-  // };
-
-  const handleClose2 = (event, name) => {
-    if (
-      anchorRef[name].current &&
-      anchorRef[name].current.contains(event.target)
-    ) {
-      return
-    }
-
-    setOpen1({ ...open1, [name]: false })
-  }
-
-  function handleListKeyDown(event, name) {
-    if (event.key === 'Tab') {
-      event.preventDefault()
-      setOpen1({ ...open1, [name]: false })
-    }
-  }
-
-  // return focus to the button when we transitioned from !open -> open
-  // const prevOpen = React.useRef(open1);
-  // React.useEffect(() => {
-  //   if (prevOpen.current === true && open1 === false) {
-  //     anchorRef.current.focus();
-  //   }
-
-  //   prevOpen.current = open1;
-  // }, [open1]);
-
   const displayDesktop = () => {
     return (
       <Container maxWidth="lg" className="p-0">
@@ -344,7 +313,6 @@ export default function Header() {
             style={{ paddingLeft: '0px' }}
           >
             {getMenuButtons()}
-
             <Box
               style={{ display: 'flex', right: '15px', position: 'absolute' }}
             >
