@@ -206,6 +206,19 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: '#fff',
   },
+  lockerBox: {
+    textAlign: 'center',
+    '& img': {
+      width: '100%',
+      maxWidth: '600px',
+    },
+    '& h1': {
+      fontSize: '90px',
+      color: '#fff',
+      // fontWeight: 700,
+      // fontStyle: 'italic',
+    },
+  },
 }))
 
 function Wallet(props) {
@@ -376,6 +389,14 @@ function Wallet(props) {
   return (
     <Page title="The Defiants - Become part of our NFT revolution!">
       <Box>
+        <Grid container spacing={1}>
+          <Grid item lg={12} xs={12}>
+            <Box className={classes.lockerBox}>
+              <Typography variant="h1">THE VAULT</Typography>
+              <img src="/images/vault/vault.png" alt="" />
+            </Box>
+          </Grid>
+        </Grid>
         <Box className={classes.deatailimage} mb={18}>
           <img
             src={`https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${account}&choe=UTF-8`}
@@ -428,7 +449,7 @@ function Wallet(props) {
               variant="h4"
               style={{ fontSize: '25px', fontWeight: '700' }}
             >
-              Total Relfection: &nbsp;{user?.totalReward} MOVR
+              Total Earnings: &nbsp;{user?.totalReward} MOVR
             </Typography>
           </Box>
           <Box mt={5} mb={5}>

@@ -18,11 +18,11 @@ const useStyles = makeStyles((theme) => ({
   headingBox: {
     textAlign: 'center',
     '& h3': {
-      fontWeight: '600',
+      // fontWeight: '600',
       marginTop: '20px',
     },
     '& h2': {
-      fontWeight: '900',
+      // fontWeight: '900',
     },
   },
   teamContentBox: {
@@ -42,12 +42,12 @@ const memberCardDetails = [
     position: 'Creative Director',
   },
   {
-    name: 'NEEAM',
+    name: 'CHIRAG',
     image: 'images/team/neeam.png',
     position: 'Web Dev',
   },
   {
-    name: 'NEYTIRI',
+    name: 'SUNIDHI',
     image: 'images/team/NEYTIRI.png',
     position: 'Smart Contract Dev',
   },
@@ -58,17 +58,14 @@ export default function () {
     <Container>
       <Box className={classes.mainContainer}>
         <Box className={classes.headingBox}>
-          <Typography variant="h2">
-            <i>TEAM</i>
-          </Typography>
+          <Typography variant="h2">TEAM</Typography>
           <Box style={{ padding: '0px 45px' }}>
             <Typography variant="h3">
-              <i>
-                {' '}
-                Our team consist of people with different experience who are
-                highly motivated to bring their knowledge and skills to the
-                proect in order to create something great.
-              </i>
+              {' '}
+              Our team consist of 4 individuals with expertise across a multiple
+              of different area. We are highly motivated and eager to bring our
+              knowledge and skills to the project in order to create something
+              great for our growing community.
             </Typography>
           </Box>
         </Box>

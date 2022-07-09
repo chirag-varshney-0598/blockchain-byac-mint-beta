@@ -232,13 +232,15 @@ h4.accordianText {
   width: 15px;
 }
 .slick-dots li button:before {
-  color: #176386;
-  font-size: 10px;
+  color: #ffff;
+  font-size: 11px;
 }
-
+.apexcharts-toolbar {
+  display: "none";
+}
 .slick-dots li.slick-active button:before {
-  color: #3e37a2 !important;
-  font-size: 10px;
+  color: yellow;
+  font-size: 14px;
 }
 .favourites {
   background-color: rgb(255, 255, 255);
@@ -1002,4 +1004,14 @@ img {
 .walletConnectButon {
   background-color: #f30065;
   color: #fff;
+}
+.slick-dots {
+  text-align: center;
+}
+* {
+  font-family: "Fugaz One", cursive !important;
+}
+
+.apexcharts-menu {
+  color: #000;
 }

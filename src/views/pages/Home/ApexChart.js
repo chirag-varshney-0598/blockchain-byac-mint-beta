@@ -1,0 +1,162 @@
+import React from 'react'
+import Chart from 'react-apexcharts'
+import {
+  Box,
+  Container,
+  Typography,
+  makeStyles,
+  Button,
+  Grid,
+  TextField,
+  withStyles,
+} from '@material-ui/core'
+const useStyles = makeStyles((theme) => ({
+  chartBox: {
+    // display: 'flex',
+    // justifyContent: 'center',
+    // width: '100%',
+  },
+  chartHandinfBox: {
+    textAlign: 'center',
+    color: '#fff',
+    '& h2': {
+      // fontWeight: '600',
+      // fontStyle: 'italic',
+    },
+  },
+}))
+export default function ApexChart() {
+  const classes = useStyles()
+  const priceHistoryData = [
+    2,
+    2.38,
+    2.76,
+    3.14,
+    3.52,
+    3.9,
+    4.28,
+    4.66,
+    5.04,
+    5.42,
+    5.8,
+    6.18,
+    6.56,
+    6.94,
+    7.32,
+    // 7.7,
+    // 8,
+  ]
+  const options = {
+    series: [
+      {
+        name: 'MOVR',
+        data: priceHistoryData,
+      },
+    ],
+    options: {
+      chart: {
+        height: 1000,
+        foreColor: '#fff',
+        type: 'line',
+        zoom: {
+          enabled: false,
+        },
+
+        categories: {
+          color: '#fff',
+          fontSize: '15px !important',
+        },
+      },
+      fill: {
+        colors: '#01e7ea85',
+        opacity: 0.9,
+        type: 'gradiant',
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        curve: 'straight',
+        colors: ['yellow'],
+        width: 3,
+      },
+      markers: {
+        size: 5,
+        colors: ['#fff'],
+        strokeColor: '#00BAEC',
+        strokeWidth: 3,
+      },
+      tooltip: {
+        theme: 'dark',
+      },
+      //   annotations: {
+      //     yaxis: [
+      //       {
+      //         y: 30,
+      //         borderColor: '#999',
+      //         label: {
+      //           show: true,
+      //           text: 'Support',
+      //           style: {
+      //             color: '#fff',
+      //             background: '#00E396',
+      //           },
+      //         },
+      //       },
+      //     ],
+      //   },
+      //   title: {
+      //     text: 'Daily Performance',
+      //     align: 'left',
+      //   },
+
+      xaxis: {
+        categories: [
+          '0-500',
+          '501 - 1000',
+          '1001 - 1500',
+          '1501 - 2000',
+          '2001 - 2500',
+          '2501 - 3000',
+          ' 3001 - 3500',
+          '3501 - 4000',
+          '4001 - 4500',
+          '4501 - 5000',
+          '5001 - 5500',
+          '5501 - 6000',
+          '6001 - 6500',
+          '6501 - 7000',
+          '7001 - 7777',
+        ],
+        title: {
+          text: 'SUPPLY',
+        },
+      },
+      yaxis: {
+        title: {
+          text: 'PRICE IN MOVR',
+        },
+      },
+    },
+  }
+  return (
+    <Container maxWidth="md">
+      <Box className={classes.chartHandinfBox}>
+        <Typography variant="h2">BONDING CURVE</Typography>
+        <Typography variant="h4">
+          5% of all minting transactions redistributed to holders
+          <br />
+          From the time of mint
+        </Typography>{' '}
+        <Chart
+          options={options.options}
+          series={options.series}
+          type="area"
+          className="customClass"
+          width={'100%'}
+          height="auto"
+        />
+      </Box>
+    </Container>
+  )
+}

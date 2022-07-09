@@ -13,13 +13,41 @@ import {
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import React, { useState, useEffect, useRef, useContext } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { UserContext } from 'src/context/User'
 import Logo from './../../component/Logo'
 import { ACTIVE_NETWORK } from 'src/constants'
 import { sortAddress } from 'src/utils'
 import { useWeb3React } from '@web3-react/core'
+import Scroll from 'react-scroll'
+import ScrollToTop from 'react-scroll-to-top'
 const headersData = [
+  {
+    label: 'MINT',
+    // href: '/',
+  },
+  {
+    label: 'ROADMAP',
+    // href: '/',
+  },
+  {
+    label: 'WHY US?',
+    // href: '/why-us',
+  },
+  {
+    label: 'TEAM',
+    // href: '/team',
+  },
+  {
+    label: 'FAQ',
+    // href: '/faq',
+  },
+  {
+    label: 'LORE',
+    // href: '/faq',
+  },
+]
+const headersDataNew = [
   {
     label: 'MINT',
     href: '/',
@@ -30,34 +58,37 @@ const headersData = [
   },
   {
     label: 'WHY US?',
-    href: '/why-us',
+    href: '/',
   },
   {
     label: 'TEAM',
-    href: '/team',
+    href: '/',
   },
   {
     label: 'FAQ',
-    href: '/faq',
+    href: '/',
   },
   {
-    label: 'WALLET',
-    href: '/wallet',
+    label: 'LORE',
+    href: '/',
   },
 ]
 const socialLink = [
   {
     img: '/images/social/discord.png',
+    href: 'https://discord.gg/kp2cV4Zp',
   },
 
-  {
-    img: '/images/social/instagram.png',
-  },
+  // {
+  //   img: '/images/social/instagram.png',
+  // },
   {
     img: '/images/social/moobeans.png',
+    href: 'https://moonbeanstoken.com',
   },
   {
     img: '/images/social/twitter.png',
+    href: 'https://mobile.twitter.com/moonriverbayc',
   },
 ]
 const useStyles = makeStyles((theme) => ({
@@ -124,7 +155,7 @@ const useStyles = makeStyles((theme) => ({
   drawerContainer: {
     padding: '20px 0px ',
     height: '100%',
-    background: '#000',
+    background: '#0e001f',
     width: '240px',
     display: 'flex',
     // paddingLeft: "20px",
@@ -253,14 +284,15 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
   },
+  newControls: {
+    fontSize: '20px',
+    color: '#fff',
+  },
 }))
-
+const ScrollLink = Scroll.Link
 export default function Header() {
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const handleClose1 = () => {
-    setAnchorEl(null)
-  }
   const {
+    newControls,
     loginButton,
     menuMobile,
     menuButton,
@@ -279,6 +311,19 @@ export default function Header() {
   const history = useHistory()
   const { account, chainId } = useWeb3React()
   const user = useContext(UserContext)
+  const [isHome, setIsHome] = useState([])
+  const [check, setCheck] = useState(false)
+  const location = useLocation()
+  useEffect(() => {
+    const applicationURL = location.pathname
+    if (applicationURL !== '/') {
+      setIsHome(headersDataNew)
+      setCheck(true)
+    } else {
+      setIsHome(headersData)
+      setCheck(false)
+    }
+  }, [location])
 
   const [state, setState] = useState({
     mobileView: false,
@@ -313,63 +358,23 @@ export default function Header() {
             style={{ paddingLeft: '0px' }}
           >
             {getMenuButtons()}
-            <Box
-              style={{ display: 'flex', right: '15px', position: 'absolute' }}
-            >
-              {account && ACTIVE_NETWORK === chainId && (
-                <>
-                  {/* <Button
-                    variant="text"
-                    size="large"
-                    color="secondary"
-                    onClick={() => history.push("/")}
-                    style={{ marginRight: 20 }}
-                  >
-                    Home
-                  </Button> */}
-                  {/* <Button
-                    variant="text"
-                    size="large"
-                    color="secondary"
-                    // onClick={() => history.push('/wallet')}
-                  >
-                    {sortAddress(account)}
-                  </Button> */}
-                  {/* <Button
-                    variant="text"
-                    size="large"
-                    color="secondary"
-                    onClick={() => history.push('/wallet')}
-                  >
-                    WALLET
-                  </Button> */}
-                  {/* <Typography variant="h4">{sortAddress(account)}</Typography> */}
-                </>
-              )}
-
-              {/* {!account ? (
+            {account && ACTIVE_NETWORK === chainId && (
+              <>
                 <Button
-                  variant="contained"
-                  size="large"
-                  color="secondary"
-                  // className="walletConnectButon"
-                  onClick={user.connectWallet}
-                  // component={Link}
-                  // to="/wallet"
+                  className={newControls}
+                  onClick={() => history.push('/wallet')}
                 >
-                  CONNECT WALLET
+                  WALLET
                 </Button>
-              ) : (
-                <Button
-                  variant="contained"
-                  size="large"
-                  color="secondary"
+                {/* <Button
+                  className={newControls}
+                  style={{}}
                   onClick={user.disconnectWalletHandler}
                 >
-                  Disconnect {account ? sortAddress(account) : ''}
-                </Button>
-              )} */}
-            </Box>
+                  DISCONNECT {account ? sortAddress(account) : ''}
+                </Button> */}
+              </>
+            )}
           </Grid>
         </Toolbar>
       </Container>
@@ -405,15 +410,28 @@ export default function Header() {
               </Link>
             </Box>
             {getDrawerChoices()}
+            {account && ACTIVE_NETWORK === chainId && (
+              <>
+                <Button
+                  className={menuButton1}
+                  style={{ width: '100%' }}
+                  onClick={() => history.push('/wallet')}
+                >
+                  <MenuItem className={menuMobile}>WALLET</MenuItem>
+                </Button>
+              </>
+            )}
             <Box className={socialBox}>
               {socialLink.map((data) => {
                 return (
                   <Box style={{ padding: '5px' }}>
-                    <img
-                      src={data.img}
-                      alt=""
-                      style={{ width: '35px', height: '30px' }}
-                    />
+                    <IconButton onClick={() => window.open(`${data?.href}`)}>
+                      <img
+                        src={data.img}
+                        alt=""
+                        style={{ width: '35px', height: '30px' }}
+                      />
+                    </IconButton>
                   </Box>
                 )
               })}
@@ -457,42 +475,115 @@ export default function Header() {
     </Box>
   )
   const getDrawerChoices = () => {
-    return headersData.map(({ label, href }) => {
+    return isHome.map(({ label, href }) => {
       return (
         <Box style={{ width: '100%' }}>
-          <Button
-            {...{
-              key: label,
-              color: 'inherit',
-              to: href,
-              component: Link,
-              className: menuButton1,
-            }}
-            style={{ width: '100%' }}
+          <ScrollLink
+            className="hovertext"
+            smooth={true}
+            duration={500}
+            to={
+              label === 'MINT'
+                ? 'section4'
+                : label === 'WHY US?'
+                ? 'section2'
+                : label === 'TEAM'
+                ? 'section3'
+                : label === 'FAQ'
+                ? 'section1'
+                : label === 'LORE'
+                ? 'section0'
+                : ''
+            }
+            style={{ cursor: 'pointer' }}
           >
-            <MenuItem className={menuMobile}>{label}</MenuItem>
-          </Button>
+            {!check ? (
+              <Button
+                {...{
+                  key: label,
+                  color: 'inherit',
+                  // to: href,
+                  // component: Link,
+                  className: menuButton1,
+                }}
+                style={{ width: '100%' }}
+                onClick={() =>
+                  setState((prevState) => ({ ...prevState, drawerOpen: false }))
+                }
+              >
+                <MenuItem className={menuMobile}>{label}</MenuItem>
+              </Button>
+            ) : (
+              <Button
+                {...{
+                  key: label,
+                  color: 'inherit',
+                  to: href,
+                  component: Link,
+                  className: menuButton1,
+                }}
+                style={{ width: '100%' }}
+                onClick={() =>
+                  setState((prevState) => ({ ...prevState, drawerOpen: false }))
+                }
+              >
+                <MenuItem className={menuMobile}>{label}</MenuItem>
+              </Button>
+            )}
+          </ScrollLink>
         </Box>
       )
     })
   }
 
   const getMenuButtons = () => {
-    return headersData.map(({ label, href }) => {
+    return isHome.map(({ label, href }) => {
       return (
-        <>
-          <Button
-            {...{
-              key: label,
-              color: 'inherit',
-              to: href,
-              component: Link,
-              className: menuButton,
-            }}
+        <Box>
+          <ScrollLink
+            className="hovertext"
+            smooth={true}
+            duration={500}
+            to={
+              label === 'MINT'
+                ? 'section4'
+                : label === 'WHY US?'
+                ? 'section2'
+                : label === 'TEAM'
+                ? 'section3'
+                : label === 'FAQ'
+                ? 'section1'
+                : label === 'LORE'
+                ? 'section0'
+                : ''
+            }
+            style={{ cursor: 'pointer' }}
           >
-            {label}
-          </Button>
-        </>
+            {!check ? (
+              <Button
+                {...{
+                  key: label,
+                  color: 'inherit',
+                  className: menuButton,
+                }}
+              >
+                {label}
+              </Button>
+            ) : (
+              <Button
+                {...{
+                  key: label,
+                  color: 'inherit',
+                  to: href,
+                  component: Link,
+                  className: menuButton,
+                }}
+              >
+                {label}
+              </Button>
+            )}
+          </ScrollLink>
+        </Box>
       )
     })
   }

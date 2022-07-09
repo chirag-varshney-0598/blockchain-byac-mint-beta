@@ -27,6 +27,7 @@ import {
   getContract,
   swichNetworkHandler,
   getWeb3ContractObject,
+  sortAddress,
 } from 'src/utils'
 import ButtonCircularProgress from 'src/component/ButtonCircularProgress'
 import NFTPunksABI from 'src/constants/ABI/NFTPunksABI.json'
@@ -266,71 +267,84 @@ function Gallery(props) {
             <Container maxWidth="lg">
               <Grid container spacing={3}>
                 <Grid item xs={12} md={6}>
-                  <Box className={classes.boxheading}>
-                    <Typography variant="h3">
-                      #{nftDetails?.id ? nftDetails?.id : ''} -{' '}
-                      {nftDetails?.nfdData?.name
-                        ? nftDetails?.nfdData?.name
-                        : ''}{' '}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      style={{ wordBreak: 'break-all', color: '#f0f0f0' }}
-                    >
-                      <strong>Owned by: </strong>&nbsp;
-                      {ownerOf ? ownerOf : ''}
-                    </Typography>
-                    <Typography
-                      variant="h4"
-                      style={{ wordBreak: 'break-all', color: '#f0f0f0' }}
-                    >
-                      <strong>Reflection Balance: </strong>&nbsp;
-                      {reflectionBalance
-                        ? `${Number(reflectionBalance).toFixed(3)} MOVR`
-                        : ''}
-                    </Typography>
+                  <Grid container spacing={1}>
+                    <Grid item lg={6} xs={12} md={6} sm={6}>
+                      <Box className={classes.boxheading}>
+                        <Typography variant="h3">
+                          #{nftDetails?.id ? nftDetails?.id : ''} -{' '}
+                          {nftDetails?.nfdData?.name
+                            ? nftDetails?.nfdData?.name
+                            : ''}{' '}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          style={{ wordBreak: 'break-all', color: '#f0f0f0' }}
+                        >
+                          <strong>Owned by: </strong>&nbsp;
+                          {ownerOf ? sortAddress(ownerOf) : ''}
+                        </Typography>
+                        <Typography
+                          variant="h4"
+                          style={{ wordBreak: 'break-all', color: '#f0f0f0' }}
+                        >
+                          <strong>Total Earnings: </strong>&nbsp;
+                          {reflectionBalance
+                            ? `${Number(reflectionBalance).toFixed(3)} MOVR`
+                            : ''}
+                        </Typography>
 
-                    {ownerOf &&
-                      account &&
-                      account.toLowerCase() === ownerOf.toLowerCase() && (
-                        <Box className={classes.boxheading1}>
-                          <Button
-                            style={{
-                              lineHeight: '25px',
-                              border: 'none',
-                              borderRadius: 'none',
-                            }}
-                            className={classes.filterbox}
-                            variant="contained"
-                            size="large"
-                            color="secondary"
-                            disabled={isClaimingReward}
-                            onClick={(e) => setOpen(true)}
-                          >
-                            <span>TRANSFER</span>
-                          </Button>
-                          <Button
-                            style={{
-                              lineHeight: '25px',
-                              border: 'none',
-                              borderRadius: 'none',
-                            }}
-                            className={classes.filterbox}
-                            variant="contained"
-                            size="large"
-                            color="secondary"
-                            onClick={claimRewardBlockchainHandler}
-                            disabled={isClaimingReward}
-                          >
-                            {isClaimingReward ? (
-                              <span>CLAIMING...</span>
-                            ) : (
-                              <span>CLAIM</span>
-                            )}
-                          </Button>
-                        </Box>
-                      )}
-                  </Box>
+                        {ownerOf &&
+                          account &&
+                          account.toLowerCase() === ownerOf.toLowerCase() && (
+                            <Box className={classes.boxheading1}>
+                              <Button
+                                style={{
+                                  lineHeight: '25px',
+                                  border: 'none',
+                                  borderRadius: 'none',
+                                }}
+                                className={classes.filterbox}
+                                variant="contained"
+                                size="large"
+                                color="secondary"
+                                disabled={isClaimingReward}
+                                onClick={(e) => setOpen(true)}
+                              >
+                                <span>TRANSFER</span>
+                              </Button>
+                              <Button
+                                style={{
+                                  lineHeight: '25px',
+                                  border: 'none',
+                                  borderRadius: 'none',
+                                }}
+                                className={classes.filterbox}
+                                variant="contained"
+                                size="large"
+                                color="secondary"
+                                onClick={claimRewardBlockchainHandler}
+                                disabled={isClaimingReward}
+                              >
+                                {isClaimingReward ? (
+                                  <span>CLAIMING...</span>
+                                ) : (
+                                  <span>CLAIM</span>
+                                )}
+                              </Button>
+                            </Box>
+                          )}
+                      </Box>
+                    </Grid>
+                    <Grid item lg={6} xs={12} md={6} sm={6}>
+                      <Box>
+                        <img
+                          src="/images/sniperDetails/raritysniper.png"
+                          alt=""
+                          width="100%"
+                        />
+                      </Box>
+                    </Grid>
+                  </Grid>
                 </Grid>
 
                 <Grid item xs={12} md={6}>

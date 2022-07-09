@@ -12,10 +12,10 @@ const useStyles = makeStyles((theme) => ({
   headingBox: {
     textAlign: 'center',
     '& h2': {
-      fontWeight: '900',
+      // fontWeight: '900',
     },
     '& h3': {
-      fontWeight: '600',
+      // fontWeight: '600',
       marginTop: '20px',
     },
   },
@@ -36,15 +36,11 @@ export default function WhyUs() {
       <Container>
         <Box>
           <Box className={classes.headingBox}>
-            <Typography variant="h2">
-              <i>WHY US?</i>
-            </Typography>
+            <Typography variant="h2">WHY US?</Typography>
             <Typography variant="h3">
-              <i>
-                {' '}
-                Why own a MoonriverBAYC ape?
-                <br /> Here are some reasons.
-              </i>{' '}
+              {' '}
+              Why own a MoonriverBAYC ape?
+              <br /> Here are some reasons.
             </Typography>
             <Box className={classes.bulletPoints}>
               <ul>

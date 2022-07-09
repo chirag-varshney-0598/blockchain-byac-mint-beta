@@ -8,6 +8,8 @@ import Team from './Team'
 import Corosel from './Corosel'
 import FAQ from '../Header/FAQ'
 import WhyUs from '../Header/WhyUs'
+import Lore from '../Header/Lore'
+import ApexChart from './ApexChart'
 
 function Home(props) {
   const refs = {
@@ -28,7 +30,12 @@ function Home(props) {
     <Page title="Become part of our NFT revolution!">
       <Box buttonClick={scrollToTop}>
         <Banner />
-        <WhatTechnologies />
+        <div ref={refs.home} id="section4">
+          <WhatTechnologies />
+        </div>
+
+        <ApexChart />
+
         {/* <PublicMint /> */}
         <Corosel />
         <div ref={refs.home} id="section3">
@@ -37,7 +44,13 @@ function Home(props) {
         <div ref={refs.home} id="section2">
           <WhyUs />
         </div>
-        <FAQ />
+
+        <div ref={refs.home} id="section1">
+          <FAQ />
+        </div>
+        <div ref={refs.home} id="section0">
+          <Lore />
+        </div>
       </Box>
     </Page>
   )

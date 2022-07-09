@@ -25,37 +25,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  bannerimages: {
-    display: 'flex',
-    position: 'relative',
-    justifyContent: 'flex-end',
-    [theme.breakpoints.down('xs')]: {
-      justifyContent: 'center',
-    },
-    '& figure': {
-      height: 'auto',
-      marginLeft: '20px',
-      marginBottom: '20px',
-      overflow: 'hidden',
-      [theme.breakpoints.down('xs')]: {
-        width: '150px',
-        overflow: 'inherit',
-      },
-      '& img': {
-        transition: '02s',
-        [theme.breakpoints.down('xs')]: {
-          width: '100%',
-        },
-      },
 
-      '&:hover': {
-        '& img': {
-          transform: 'scale(1.1)',
-          boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
-        },
-      },
-    },
-  },
   gridflex: {
     display: 'flex',
     alignItems: 'center',
@@ -71,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     '& h1': {
       fontSize: '45px',
-      fontWeight: '600',
+      // fontWeight: '600',
       color: '#FFFFFF',
       [theme.breakpoints.down('lg')]: {},
       [theme.breakpoints.down('xs')]: {
@@ -84,22 +54,6 @@ const useStyles = makeStyles((theme) => ({
       marginTop: '20px',
       color: '#cecece',
     },
-  },
-  image2: {
-    marginLeft: '-20px !important',
-    [theme.breakpoints.down('xs')]: {
-      marginLeft: '0px !important',
-    },
-  },
-  buttonright: {
-    marginLeft: '10px !important',
-    minWidth: '150px',
-  },
-  minth1: {
-    fontFamily: 'Italianno',
-    fontSize: '80px !important',
-    fontWeight: '100px !important',
-    lineHeight: '80px',
   },
 }))
 
@@ -119,9 +73,7 @@ export default function BestSeller() {
             className={classes.gridflex}
           >
             <Box className={classes.textbox} style={{ textAlign: 'center' }}>
-              <Typography variant="h1">
-                <i>Let's grab some of the most wanted MBYAC NFT.</i>
-              </Typography>
+              <Typography variant="h1">MOONRIVER BAYC</Typography>
               <Typography
                 variant="body1"
                 align="center"

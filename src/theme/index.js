@@ -213,6 +213,7 @@ const baseOptions = {
           color: '#000',
         },
       },
+
       contained: {
         borderRadius: '50px',
         color: '#f30065',
@@ -244,6 +245,19 @@ const baseOptions = {
         padding: '6px 23px',
         fontSize: '30px',
         lineHeight: ' 65px',
+      },
+    },
+    MuiAccordionSummary: {
+      content: {
+        textAlign: 'center',
+        display: 'flex',
+        justifyContent: 'center',
+      },
+    },
+    MuiAccordionDetails: {
+      root: {
+        display: 'flex',
+        justifyContent: 'center',
       },
     },
     MuiDrawer: {

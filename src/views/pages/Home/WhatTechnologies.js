@@ -9,6 +9,7 @@ import {
   withStyles,
   TextField,
   Slider,
+  IconButton,
 } from '@material-ui/core'
 import { useWeb3React } from '@web3-react/core'
 import { mintAddress, ACTIVE_NETWORK } from 'src/constants'
@@ -147,8 +148,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '120px',
     fontWeight: '900',
     fontStyle: 'italic',
-    WebkitTextStrokeWidth: '1px',
-    WebkitTextStrokeColor: 'black',
+    // WebkitTextStrokeWidth: '1px',
+    // WebkitTextStrokeColor: 'black',
     // border: "1px solid #FFFFFF;",
     '@media(max-width:960px)': {
       marginTop: '-12px',

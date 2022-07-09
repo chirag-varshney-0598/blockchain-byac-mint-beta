@@ -15,10 +15,10 @@ const useStyles = makeStyles((theme) => ({
   headingBox: {
     textAlign: 'center',
     '& h2': {
-      fontWeight: '900',
+      // fontWeight: '900',
     },
     '& h3': {
-      fontWeight: '600',
+      // fontWeight: '600',
       marginTop: '20px',
     },
   },
@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '18px',
     fontWeight: '400',
     letterSpacing: '1px',
+    textAlign: 'center',
   },
   accordianBox: {
     marginTop: '20px',
@@ -46,29 +47,16 @@ const useStyles = makeStyles((theme) => ({
 const accordianDataFAQ = [
   {
     heading: 'WHEN IS THE OFFICIAL LAUNCH?',
-    details: `As we mainly focus on delivering the best possible product we don’t stress for a fixed date,however end of May.`,
+    details: `As we mainly focus on delivering the best possible product we don’t stress for a fixed date,however end of July early August.`,
   },
   {
     heading: 'WHAT WILL THE MINT COST BE?',
-    details: `The cost structure will be as following:
-
-    Minting will start at a discounted price
-    of 1.5 movr for first 1800, then 2.5 movr
-    from 1801-3800, 3.5 movr from 3801-5800
-    and 4.5 movr from 5801-7777 
-    
-    Note that 5% of all minting costs will
-    be redistributed to the holders and fortune
-    those who mint early as cost rise.
+    details: `The cost structure will follow our bonding curve graph increasing in 0.38 increments until 7000 have been minted then for the final 777 each NFT will cost 8 MOVR. Note that 5% of all mint transactions will be redistributed to holders and as a result those who have minted early as the cost rises will prosper more - so than those who mint closer towards sellout.
     `,
   },
   {
     heading: 'HOW MANY TRAITS ARE THERE?',
-    details: `Each MBAYC is unique they have
-    algorithmically been generated from over
-    140+ possible traits spread over? layers,
-    this includes 4 different rarity categories:
-    Common, rare, super rare & legendary.`,
+    details: `Each MBAYC NFT is unique, generated with an alogrithm using over 140+ different traits across 7 different layers per NFT. This includes 4 different rarity category's common, rare, super rare and legendary`,
   },
   {
     heading: 'HOW DO I CHECK RANKINGS?',
@@ -81,9 +69,8 @@ const accordianDataFAQ = [
   },
   {
     heading: 'HOW CAN I STAY UP TO DATE?',
-    details: `To stay up to date follow Our twitter
-    @Moonriverbayc or to hear things as they
-    happen join our discord.`,
+    details: `To stay up to date follow our Twitter
+    @Moonriverbayc or to be involved in decisions, games and a thriving community as it grows and makes history join our discord.`,
   },
 ]
 export default function FAQ() {
@@ -93,9 +80,7 @@ export default function FAQ() {
       <Container>
         <Box>
           <Box className={classes.headingBox}>
-            <Typography variant="h2">
-              <i>FAQ</i>
-            </Typography>
+            <Typography variant="h2">FAQ</Typography>
           </Box>
           <Box className={classes.accordianBox}>
             {accordianDataFAQ &&
@@ -110,12 +95,12 @@ export default function FAQ() {
                       id="panel1a-header"
                     >
                       <Typography className={classes.heading}>
-                        <i>{data?.heading}</i>
+                        {data?.heading}
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                       <Typography className={classes.detailsAccordian}>
-                        <i>{data.details}</i>
+                        {data.details}
                       </Typography>
                     </AccordionDetails>
                   </Accordion>
