@@ -298,7 +298,7 @@ const useStyles = makeStyles((theme) => ({
 //     setState({ ...state, [event.target.name]: event.target.checked });
 //   };
 
-export default function BestSeller() {
+export default function BestSeller({ setNFTPriceCurrent }) {
   const classes = useStyles()
   const history = useHistory()
   const { library, account, chainId } = useWeb3React()
@@ -365,12 +365,16 @@ export default function BestSeller() {
     const web3 = await getWeb3Obj()
     try {
       const contractObj = await getWeb3ContractObject(NFTPunksABI, mintAddress)
+      // console.log('contractObj----', contractObj)
+      // const currentRate = await contractObj.methods.currentRate().call()
+      // console.log('currentRate', web3.utils.fromWei(currentRate))
       const getNFTPriceFun = await contractObj.methods.getNFTPrice().call()
       const totalSupplyFun = await contractObj.methods.totalSupply().call()
       const MAX_SUPPLYFun = await contractObj.methods.MAX_SUPPLY().call()
       setTotalSupply(totalSupplyFun.toString())
       setMaxSupply(MAX_SUPPLYFun.toString())
       setNFTPrice(web3.utils.fromWei(getNFTPriceFun))
+      setNFTPriceCurrent(web3.utils.fromWei(getNFTPriceFun))
     } catch (error) {
       console.log(error)
     }

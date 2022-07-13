@@ -55,21 +55,6 @@ const useStyles = makeStyles((theme) => ({
 }))
 const accordianDataFAQ = [
   {
-    heading: 'POLKADOT',
-    details: `These alien species of apes known as the Polkadot apes are the closest relatives to the
-    Moonriver apes. At some point in time the descendants of an unknown race of apes
-    separated across the galaxy creating two advanced alien species. the polkadots are an
-    entirely female species who have advanced intellect and are peaceful in nature. This ape
-    society are well versed in galactic travel and are great diplomats in there solar system
-    maintaining peace while documenting the history of their race in cryptic writings stored in
-    their ancient library on their home planets capital city named polkatropolis. As much as this
-    species travels the galaxy they are yet to encounter fellow apes from their bloodline. These
-    apes yearn to learn about their past and discover and document the time line of their
-    species. In their search for this information the species have sent out thousands of
-    messages into the darkness of space in the hopes of contact with their lost relatives.`,
-    image: '/images/lore/lorePolkadot.png',
-  },
-  {
     heading: 'MOONRIVER',
     details: `The moon planet Moonriver, home to the Moonriver apes is a relatively small planet made up
     of mountain ranges and rivers that run for miles across the moon's surface. The apes that
@@ -95,6 +80,22 @@ const accordianDataFAQ = [
     `,
     image: '/images/lore/loreMoonriver.png',
   },
+  {
+    heading: 'POLKADOT',
+    details: `These alien species of apes known as the Polkadot apes are the closest relatives to the
+    Moonriver apes. At some point in time the descendants of an unknown race of apes
+    separated across the galaxy creating two advanced alien species. the polkadots are an
+    entirely female species who have advanced intellect and are peaceful in nature. This ape
+    society are well versed in galactic travel and are great diplomats in there solar system
+    maintaining peace while documenting the history of their race in cryptic writings stored in
+    their ancient library on their home planets capital city named polkatropolis. As much as this
+    species travels the galaxy they are yet to encounter fellow apes from their bloodline. These
+    apes yearn to learn about their past and discover and document the time line of their
+    species. In their search for this information the species have sent out thousands of
+    messages into the darkness of space in the hopes of contact with their lost relatives.`,
+    image: '/images/lore/lorePolkadot.png',
+  },
+
   {
     heading: 'KUSAMA',
     details: `The Kusama apes are a fascinating species of apes who originate from a jungle planet in the

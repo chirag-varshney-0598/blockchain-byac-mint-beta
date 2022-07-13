@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { Box } from '@material-ui/core'
 import Page from 'src/component/Page'
 import Banner from './Banner'
@@ -27,24 +27,28 @@ function Home(props) {
       behavior: 'smooth',
     })
   }
+  const [nftPriceCurrent, setNFTPriceCurrent] = useState('')
   return (
     <Page title="Become part of our NFT revolution!">
       <Box buttonClick={scrollToTop}>
         <Banner />
         <div ref={refs.home} id="section4">
-          <WhatTechnologies />
+          <WhatTechnologies
+            setNFTPriceCurrent={(data) => setNFTPriceCurrent(data)}
+          />
         </div>
 
-        <ApexChart />
+        <ApexChart nftPriceCurrent={nftPriceCurrent} />
 
         {/* <PublicMint /> */}
         <Corosel />
-        <div ref={refs.home} id="section3">
-          <Team />
-        </div>
         <div ref={refs.home} id="section2">
           <WhyUs />
         </div>
+        <div ref={refs.home} id="section3">
+          <Team />
+        </div>
+
         <div ref={refs.home} id="section5">
           <Roadmap />
         </div>

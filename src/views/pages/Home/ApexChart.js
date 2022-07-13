@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }))
-export default function ApexChart() {
+export default function ApexChart({ nftPriceCurrent }) {
   const classes = useStyles()
   const priceHistoryData = [
     // 0,
@@ -47,6 +47,7 @@ export default function ApexChart() {
     // 7.7,
     // 8,
   ]
+
   const options = {
     series: [
       {
@@ -113,8 +114,18 @@ export default function ApexChart() {
       },
       markers: {
         size: 5,
-        colors: ['#fff'],
-        strokeColor: '#00BAEC',
+        colors:
+          // parseFloat(nftPriceCurrent) ===
+          // parseFloat(priceHistoryData[nftPriceCurrent])
+          //   ? ['red']
+          // :
+          ['#fff'],
+        strokeColor:
+          // parseFloat(nftPriceCurrent) ===
+          // parseFloat(priceHistoryData[nftPriceCurrent])
+          //   ? 'red'
+          //   :
+          '#00BAEC',
         strokeWidth: 3,
       },
       tooltip: {
@@ -180,14 +191,16 @@ export default function ApexChart() {
           <br />
           From the time of mint
         </Typography>{' '}
-        <Chart
-          options={options.options}
-          series={options.series}
-          type="area"
-          className="customClass"
-          width={'100%'}
-          height="auto"
-        />
+        {nftPriceCurrent && (
+          <Chart
+            options={options.options}
+            series={options.series}
+            type="area"
+            className="customClass"
+            width={'100%'}
+            height="auto"
+          />
+        )}
       </Box>
     </Container>
   )
