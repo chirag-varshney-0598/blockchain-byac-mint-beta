@@ -10,6 +10,7 @@ import FAQ from '../Header/FAQ'
 import WhyUs from '../Header/WhyUs'
 import Lore from '../Header/Lore'
 import ApexChart from './ApexChart'
+import Roadmap from './Roadmap'
 
 function Home(props) {
   const refs = {
@@ -44,7 +45,9 @@ function Home(props) {
         <div ref={refs.home} id="section2">
           <WhyUs />
         </div>
-
+        <div ref={refs.home} id="section5">
+          <Roadmap />
+        </div>
         <div ref={refs.home} id="section1">
           <FAQ />
         </div>

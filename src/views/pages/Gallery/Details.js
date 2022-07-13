@@ -268,7 +268,7 @@ function Gallery(props) {
               <Grid container spacing={3}>
                 <Grid item xs={12} md={6}>
                   <Grid container spacing={1}>
-                    <Grid item lg={6} xs={12} md={6} sm={6}>
+                    <Grid item lg={12} xs={12} md={12} sm={12}>
                       <Box className={classes.boxheading}>
                         <Typography variant="h3">
                           #{nftDetails?.id ? nftDetails?.id : ''} -{' '}
@@ -335,7 +335,7 @@ function Gallery(props) {
                           )}
                       </Box>
                     </Grid>
-                    <Grid item lg={6} xs={12} md={6} sm={6}>
+                    {/* <Grid item lg={6} xs={12} md={6} sm={6}>
                       <Box>
                         <img
                           src="/images/sniperDetails/raritysniper.png"
@@ -343,7 +343,7 @@ function Gallery(props) {
                           width="100%"
                         />
                       </Box>
-                    </Grid>
+                    </Grid> */}
                   </Grid>
                 </Grid>
 

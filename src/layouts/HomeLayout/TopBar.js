@@ -153,7 +153,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '30px',
   },
   drawerContainer: {
-    padding: '20px 0px ',
+    // padding: '20px 0px ',
     height: '100%',
     background: '#0e001f',
     width: '240px',
@@ -493,6 +493,8 @@ export default function Header() {
                 ? 'section1'
                 : label === 'LORE'
                 ? 'section0'
+                : label === 'ROADMAP'
+                ? 'section5'
                 : ''
             }
             style={{ cursor: 'pointer' }}
@@ -555,6 +557,8 @@ export default function Header() {
                 ? 'section1'
                 : label === 'LORE'
                 ? 'section0'
+                : label === 'ROADMAP'
+                ? 'section5'
                 : ''
             }
             style={{ cursor: 'pointer' }}

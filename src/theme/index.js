@@ -264,6 +264,9 @@ const baseOptions = {
       paperAnchorDockedLeft: {
         borderRight: '0',
       },
+      paperAnchorRight: {
+        backgroundColor: '#0e001f !important',
+      },
     },
     MuiMenu: {
       paper: { top: '47px' },

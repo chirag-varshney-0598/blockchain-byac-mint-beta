@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ApexChart() {
   const classes = useStyles()
   const priceHistoryData = [
+    // 0,
     2,
     2.38,
     2.76,
@@ -42,7 +43,7 @@ export default function ApexChart() {
     6.18,
     6.56,
     6.94,
-    7.32,
+    8,
     // 7.7,
     // 8,
   ]
@@ -59,12 +60,42 @@ export default function ApexChart() {
         foreColor: '#fff',
         type: 'line',
         zoom: {
-          enabled: false,
+          enabled: true,
         },
 
         categories: {
           color: '#fff',
           fontSize: '15px !important',
+        },
+        grid: {
+          show: true,
+          borderColor: '#90A4AE',
+          strokeDashArray: 0,
+          position: 'back',
+          xaxis: {
+            lines: {
+              show: false,
+            },
+          },
+          yaxis: {
+            lines: {
+              show: false,
+            },
+          },
+          row: {
+            colors: undefined,
+            opacity: 0.5,
+          },
+          column: {
+            colors: undefined,
+            opacity: 0.5,
+          },
+          padding: {
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+          },
         },
       },
       fill: {
@@ -89,6 +120,7 @@ export default function ApexChart() {
       tooltip: {
         theme: 'dark',
       },
+
       //   annotations: {
       //     yaxis: [
       //       {

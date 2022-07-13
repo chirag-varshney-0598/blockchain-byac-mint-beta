@@ -202,9 +202,36 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   relfectionBox: {
-    width: '100%',
     textAlign: 'center',
     color: '#fff',
+    // display: 'inline-block',
+    flesWarp: 'warp',
+    minWidth: '90px',
+    boxShadow: 'rgb(0 0 0 / 13%) 0px 5px 15px',
+    border: '1px solid #ccc',
+    padding: '40px 0px',
+    // width: '100%',
+    borderRadius: '12px',
+    margin: '50px 5px 10px 5px',
+    transition: ' 02s',
+    background: '#ffffff1c',
+    '&:hover': {
+      transform: 'translateY(-10px)',
+    },
+    '& label': {
+      fontSize: '15px',
+      paddingBottom: 0,
+      color: '#00ffff',
+    },
+    '& p': {
+      color: 'white',
+    },
+  },
+  claimButton: {
+    background: 'aqua',
+    color: '#fff',
+    borderRadius: '6px',
+    border: '1px solid aqua',
   },
   lockerBox: {
     textAlign: 'center',
@@ -432,7 +459,7 @@ function Wallet(props) {
               )}
           </Grid>
 
-          <Typography
+          {/* <Typography
             variant="h3"
             align="center"
             style={
@@ -443,17 +470,43 @@ function Wallet(props) {
           >
             ***All NFTs will be displayed once the admin stores their
             Metadata***
-          </Typography>
-          <Box className={classes.relfectionBox}>
-            <Typography
-              variant="h4"
-              style={{ fontSize: '25px', fontWeight: '700' }}
-            >
-              Total Earnings: &nbsp;{user?.totalReward} MOVR
-            </Typography>
-          </Box>
+          </Typography> */}
+          <Grid container spacing={1}>
+            <Grid item lg={4} sm={4} md={4} xs={12}>
+              <Box className={classes.relfectionBox}>
+                <Typography
+                  variant="h4"
+                  style={{ fontSize: '18px', fontWeight: '700' }}
+                >
+                  OWNED NFT:
+                  <br /> {nftList ? nftList.length : 0}
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item lg={4} sm={4} md={4} xs={12}>
+              <Box className={classes.relfectionBox}>
+                <Typography
+                  variant="h4"
+                  style={{ fontSize: '18px', fontWeight: '700' }}
+                >
+                  TOTAL EARNINGS:
+                  <br />
+                  {user?.totalReward} MOVR
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item lg={4} sm={4} md={4} xs={12}>
+              <Box
+                className={classes.relfectionBox}
+                // style={{ padding: '33px' }}
+              >
+                <Button className={classes.claimButton}>CLAIM</Button>
+              </Box>
+            </Grid>
+          </Grid>
+
           <Box mt={5} mb={5}>
-            <Grid container spacing={3}>
+            <Grid container spacing={4}>
               {nftList &&
                 nftList.map((data, i) => {
                   return (

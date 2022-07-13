@@ -16,12 +16,12 @@ const useStyles = makeStyles((theme) => ({
     // backgroundRepeat: "no-repeat",
     // background: "linear-gradient(0deg, #060606 0%, rgba(0, 0, 0, 0) 139.5%)",
     // backgroundSize: "cover",
-    padding: '80px 0px 0px',
+    padding: '10px 0px 0px',
     zIndex: ' 1',
     [theme.breakpoints.down('md')]: {
       height: 'auto',
       '@media (max-width: 768px)': {
-        padding: '60px 0px 60px',
+        padding: '10px 0px 60px',
       },
     },
   },
@@ -64,6 +64,11 @@ export default function BestSeller() {
     <Box className={classes.bannerBox}>
       <Container maxWidth="lg" p={0}>
         <Grid container alignItems="left">
+          <Box>
+            <Box>
+              <img src="/images/home/banner.png" alt="" width="100%" />
+            </Box>
+          </Box>
           <Grid
             item
             xs={12}
@@ -79,17 +84,15 @@ export default function BestSeller() {
                 align="center"
                 style={{ color: '#fff' }}
               >
-                <i>
-                  {' '}
-                  MBAYC is an exclusive 7777 only premium NFT on the Moonriver
-                  blockchain with blue chip potential No two of these digital
-                  eye-catching pieces of art are alike. Each being uniquely
-                  generated from over 140+ never seen Before traits, our traits
-                  have specific rarities to ensure there is a clear ranking of
-                  NFTs and distinct differences in value for the marketplace.
-                  MBAYC is inspired by its Ethereum counterpart but is not
-                  affiliated with yuga labs.
-                </i>
+                {' '}
+                MBAYC is an exclusive 7777 only premium NFT on the Moonriver
+                blockchain with blue chip potential No two of these digital
+                eye-catching pieces of art are alike. Each being uniquely
+                generated from over 140+ never seen Before traits, our traits
+                have specific rarities to ensure there is a clear ranking of
+                NFTs and distinct differences in value for the marketplace.
+                MBAYC is inspired by its Ethereum counterpart but is not
+                affiliated with yuga labs.
               </Typography>
 
               <Typography
@@ -97,11 +100,9 @@ export default function BestSeller() {
                 align="center"
                 style={{ color: '#fff' }}
               >
-                <i>
-                  MBAYC is the first ape derivative on MOVR blockchain and
-                  prides itself on being a community ran and community focused
-                  together we can make history on the MOVVR blockchain.
-                </i>
+                MBAYC is the first ape derivative on MOVR blockchain and prides
+                itself on being a community ran and community focused together
+                we can make history on the MOVR blockchain.
               </Typography>
               {/* <Box mt={6} align="left">
                 <Button
