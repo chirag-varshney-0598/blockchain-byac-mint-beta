@@ -68,15 +68,6 @@ const accordianDataFAQ = [
     their new space crafts. these apes have now set their sights on discovering their beginnings
     and finding any life forms which may be related by blood and re uniting with potential lost
     relatives.
-
-    Minting will start at a discounted price
-    of 1.5 movr for first 1800, then 2.5 movr
-    from 1801-3800, 3.5 movr from 3801-5800
-    and 4.5 movr from 5801-7777 
-    
-    Note that 5% of all minting costs will
-    be redistributed to the holders and fortune
-    those who mint early as cost rise.
     `,
     image: '/images/lore/loreMoonriver.png',
   },
@@ -172,20 +163,7 @@ const accordianDataFAQ = [
   },
   {
     heading: 'SUSHI',
-    details: `Planet sushi home to a species of apes known as the sushi apes are a complex Species of
-    apes with deep routed traditions and culture. Their history goes Back millions of years and
-    yet their society has functioned sustainable the same way from the beginning of time, Their
-    society has strict unwritten rules and formalities stemming from their respect for their elders,
-    The eldest apes in their communities are said to be the wisest among them and they provide
-    knowledge and guidance to the young apes growing up on the planet to help them live
-    honorable lives. These apes are wise and acknowledge that their threats within there are
-    galaxy that may jeopardize their way of life, their strong will and desire to protect their
-    traditions gave birth to the samurai warrior ape. Males who pledge their lives to defend their
-    society from these threats dawn samurai armor and intricate tattoos depicting their loyalty
-    strength fearlessness and honor. Although they are a peaceful species they will defend their
-    culture with their lives. These apes are on a constant path to find the meaning of life through
-    spirituality and internal exploration, believing in a higher power is what allows these apes to
-    live out their lives peacefully knowing that all will be ok in time.`,
+    details: ` These apes are wise and acknowledge that threats within their galaxy may jeopardize their way of life.`,
     image: '/images/lore/sushi.png',
   },
   {
@@ -197,7 +175,7 @@ const accordianDataFAQ = [
     their consciousness to their global network allowing life after death. The RMRK’s gaming
     based culture has kept the planet at peace by resolving conflicts and disputes amongst its
     nations in virtual battles of tactics, whits, and skill broadcast to the entire planet.`,
-    image: '/images/lore/rome.png',
+    image: '/images/lore/rmrk.png',
   },
   {
     heading: 'ZENLINK',

@@ -132,26 +132,23 @@ export default function ApexChart({ nftPriceCurrent }) {
         theme: 'dark',
       },
 
-      //   annotations: {
-      //     yaxis: [
-      //       {
-      //         y: 30,
-      //         borderColor: '#999',
-      //         label: {
-      //           show: true,
-      //           text: 'Support',
-      //           style: {
-      //             color: '#fff',
-      //             background: '#00E396',
-      //           },
-      //         },
-      //       },
-      //     ],
-      //   },
-      //   title: {
-      //     text: 'Daily Performance',
-      //     align: 'left',
-      //   },
+      annotations: {
+        yaxis: [
+          {
+            y: parseFloat(nftPriceCurrent),
+            borderColor: '#999',
+            label: {
+              show: true,
+              align: 'left',
+              text: `Current Price: ${nftPriceCurrent} MOVR`,
+              style: {
+                color: '#fff',
+                background: '#00E396',
+              },
+            },
+          },
+        ],
+      },
 
       xaxis: {
         categories: [

@@ -112,7 +112,7 @@ export default function Roadmap() {
                             <Box
                               className={classes.lineBarY}
                               style={
-                                i == 0
+                                i == 0 || i == 1
                                   ? { background: 'yellow' }
                                   : { background: 'aqua' }
                               }

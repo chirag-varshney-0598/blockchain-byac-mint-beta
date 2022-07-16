@@ -85,14 +85,7 @@ export default function BestSeller() {
                 style={{ color: '#fff' }}
               >
                 {' '}
-                MBAYC is an exclusive 7777 only premium NFT on the Moonriver
-                blockchain with blue chip potential No two of these digital
-                eye-catching pieces of art are alike. Each being uniquely
-                generated from over 140+ never seen Before traits, our traits
-                have specific rarities to ensure there is a clear ranking of
-                NFTs and distinct differences in value for the marketplace.
-                MBAYC is inspired by its Ethereum counterpart but is not
-                affiliated with yuga labs.
+                MBAYC is an exclusive collection of 7777 premium NFTs on the Moonriver blockchain with blue chip potential. No two of these digital eye-catching pieces of art are alike. Each being uniquely generated from over 140+ never seen before traits, our traits have specific rarities to ensure there is a clear ranking of these NFTs and distinct differences in value for the marketplace. MBAYC is inspired by its Ethereum counterpart but is not affiliated with Yuga Labs.
               </Typography>
 
               <Typography
@@ -100,9 +93,7 @@ export default function BestSeller() {
                 align="center"
                 style={{ color: '#fff' }}
               >
-                MBAYC is the first ape derivative on MOVR blockchain and prides
-                itself on being a community ran and community focused together
-                we can make history on the MOVR blockchain.
+               MBAYC is the first ape derivative on the MOVR blockchain and prides itself on being a community ran and community focused project, together we will make history on the MOVR blockchain.
               </Typography>
               {/* <Box mt={6} align="left">
                 <Button

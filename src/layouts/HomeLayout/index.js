@@ -7,10 +7,11 @@ import TopBar from './TopBar'
 const useStyles = makeStyles((theme) => ({
   root: {
     // backgroundColor: "#000",
-    backgroundImage: 'url(images/background/banner.png)',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
+    backgroundImage: 'url(images/background/bg.jpg)',
+    // backgroundPosition: 'center',
+    // backgroundRepeat: 'no-repeat',
+    // backgroundSize: 'cover',
+    width: '100%',
   },
   MainLayout: {
     minHeight: 'calc(100vh - 415px)',

@@ -62,10 +62,10 @@ export default function () {
           <Box style={{ padding: '0px 45px' }}>
             <Typography variant="h3">
               {' '}
-              Our team consist of 4 individuals with expertise across a multiple
-              of different area. We are highly motivated and eager to bring our
-              knowledge and skills to the project in order to create something
-              great for our growing community.
+              Our team consist of 4 individuals with expertise across a
+              multitude of different areas. We are highly motivated and eager to
+              bring our knowledge and skills to the project in order to create
+              something great for our growing community.
             </Typography>
           </Box>
         </Box>

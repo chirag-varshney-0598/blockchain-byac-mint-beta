@@ -60,8 +60,7 @@ const accordianDataFAQ = [
   },
   {
     heading: 'HOW DO I CHECK RANKINGS?',
-    details: `You can check out our rarity on:
-    https://raritysniper.com`,
+    details: `You can check out our rarity on our discord in Check Rank`,
   },
   {
     heading: 'MARKETPLACE?',
