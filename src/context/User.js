@@ -137,32 +137,32 @@ export default function AuthProvider(props) {
   //   setMintPercentage(per)
   // }
 
-  // const userNFTListHadler = async (balanceOf, cancelTokenSource) => {
-  //   setUserNFTList([])
-  //   setUserNftLoading(true)
-  //   const contract = getContract(mintAddress, NFTPunksABI, library, account)
+  const userNFTListHadler = async (balanceOf, cancelTokenSource) => {
+    setUserNFTList([])
+    setUserNftLoading(true)
+    const contract = getContract(mintAddress, NFTPunksABI, library, account)
 
-  //   try {
-  //     for (let i = 0; i < balanceOf; i++) {
-  //       const id = await contract.tokenOfOwnerByIndex(account, i)
-  //       const filter = await contract.tokenURI(id.toString())
+    try {
+      for (let i = 0; i < balanceOf; i++) {
+        const id = await contract.tokenOfOwnerByIndex(account, i)
+        const filter = await contract.tokenURI(id.toString())
 
-  //       const res = await axios.get(filter, {
-  //         cancelToken: cancelTokenSource && cancelTokenSource.token,
-  //       })
-  //       if (res.status === 200) {
-  //         setUserNFTList((prev) => [
-  //           ...prev,
-  //           { id: id.toString(), nfdData: res.data },
-  //         ])
-  //         setUserNftLoading(false)
-  //       }
-  //     }
-  //   } catch (e) {
-  //     console.log(e)
-  //     setUserNftLoading(false)
-  //   }
-  // }
+        const res = await axios.get(filter, {
+          cancelToken: cancelTokenSource && cancelTokenSource.token,
+        })
+        if (res.status === 200) {
+          setUserNFTList((prev) => [
+            ...prev,
+            { id: id.toString(), nfdData: res.data },
+          ])
+          setUserNftLoading(false)
+        }
+      }
+    } catch (e) {
+      console.log(e)
+      setUserNftLoading(false)
+    }
+  }
 
   // const allNFTListHandler = async (txaCount, cancelTokenSource) => {
   //   //eslint-disable-line no-unused-vars
@@ -197,16 +197,16 @@ export default function AuthProvider(props) {
   //     allNFTListHandler(totalSupply, cancelTokenSource)
   //   }
   // }, [totalSupply])
-  // useEffect(() => {
-  //   const cancelTokenSource = axios.CancelToken.source()
+  useEffect(() => {
+    const cancelTokenSource = axios.CancelToken.source()
 
-  //   if (balanceOfValue > 0) {
-  //     userNFTListHadler(balanceOfValue, cancelTokenSource)
-  //   }
-  //   return () => {
-  //     cancelTokenSource.cancel()
-  //   }
-  // }, [balanceOfValue, account])
+    if (balanceOfValue > 0) {
+      userNFTListHadler(balanceOfValue, cancelTokenSource)
+    }
+    return () => {
+      cancelTokenSource.cancel()
+    }
+  }, [balanceOfValue, account])
 
   useEffect(() => {
     getContractDetailsHandler()
